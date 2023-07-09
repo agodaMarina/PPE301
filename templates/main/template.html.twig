@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {% block title %}
-    <title>ERP</title>
+        <title>ERP</title>
     {% endblock title %}
 
 
     {% block style %}
     <!-- Favicon -->
-    <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
-    <link rel="stylesheet" href="{{asset ('../assets/css/backend-plugin.min.css')}}">
-    <link rel="stylesheet" href="{{ asset ('../assets/css/backende209.css?v=1.0.0')}}">
-    <link rel="stylesheet" href="{{asset ('../assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet"
-        href="{{asset ('../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset ('../assets/vendor/remixicon/fonts/remixicon.css')}}">
+        <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
+        <link rel="stylesheet" href="{{asset ('../assets/css/backend-plugin.min.css')}}">
+        <link rel="stylesheet" href="{{ asset ('../assets/css/backende209.css?v=1.0.0')}}">
+        <link rel="stylesheet" href="{{asset ('../assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet"
+            href="{{asset ('../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset ('../assets/vendor/remixicon/fonts/remixicon.css')}}">
     {% endblock style %}
 
 </head>
@@ -62,7 +62,7 @@
                                     <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
                                     <line x1="12" y1="22.08" x2="12" y2="12"></line>
                                 </svg>
-                                <span class="ml-4">Dashboards</span>
+                                <span class="ml-4">Dashboard</span>
                             </a>
                         </li>
                         <li class=" ">
@@ -86,13 +86,13 @@
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="page-list-product.html">
-                                        <i class="las la-minus"></i><span>List Product</span>
+                                    <a href="{{path('liste_article')}}">
+                                        <i class="las la-minus"></i><span>Liste Des Produits</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="page-add-product.html">
-                                        <i class="las la-minus"></i><span>Add Product</span>
+                                    <a href="{{path('create_article')}}">
+                                        <i class="las la-minus"></i><span>Ajouter Un Produit</span>
                                     </a>
                                 </li>
                             </ul>
@@ -117,114 +117,19 @@
                             </a>
                             <ul id="category" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="page-list-category.html">
-                                        <i class="las la-minus"></i><span>List Category</span>
+                                    <a href="{{path ('liste_categorie')}}">
+                                        <i class="las la-minus"></i><span>Liste Des Catégories</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="page-add-category.html">
-                                        <i class="las la-minus"></i><span>Add Category</span>
+                                    <a href="{{path ('create_categorie')}}">
+                                        <i class="las la-minus"></i><span>Ajouter Une Catégorie</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class=" ">
-                            <a href="#sale" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash4" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path>
-                                    <path d="M22 12A10 10 0 0 0 12 2v10z"></path>
-                                </svg>
-                                <span class="ml-4">Sale</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="sale" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-sale.html">
-                                        <i class="las la-minus"></i><span>List Sale</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-sale.html">
-                                        <i class="las la-minus"></i><span>Add Sale</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" ">
-                            <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                    <line x1="1" y1="10" x2="23" y2="10"></line>
-                                </svg>
-                                <span class="ml-4">Achats</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-purchase.html">
-                                        <i class="las la-minus"></i><span>List Purchases</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-purchase.html">
-                                        <i class="las la-minus"></i><span>Add purchase</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" ">
-                            <a href="#return" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash6" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="4 14 10 14 10 20"></polyline>
-                                    <polyline points="20 10 14 10 14 4"></polyline>
-                                    <line x1="14" y1="10" x2="21" y2="3"></line>
-                                    <line x1="3" y1="21" x2="10" y2="14"></line>
-                                </svg>
-                                <span class="ml-4">Returns</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline>
-                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
-                                </svg>
-                            </a>
-                            <ul id="return" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                <li class="">
-                                    <a href="page-list-returns.html">
-                                        <i class="las la-minus"></i><span>List Returns</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-return.html">
-                                        <i class="las la-minus"></i><span>Add Return</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class=" ">
-                            <a href="#people" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                            <a href="#fournisseur" class="collapsed" data-toggle="collapse" aria-expanded="false">
                                 <svg class="svg-icon" id="p-dash8" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -234,7 +139,7 @@
                                     <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
-                                <span class="ml-4">People</span>
+                                <span class="ml-4">Fournisseurs</span>
                                 <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -243,30 +148,21 @@
                                     <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
-                            <ul id="people" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-
+                            <ul id="fournisseur" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
                                 <li class="">
-                                    <a href="page-list-users.html">
-                                        <i class="las la-minus"></i><span>Users</span>
+                                    <a href="{{path ('read_fournisseur')}}">
+                                        <i class="las la-minus"></i><span>Liste des Fournisseurs</span>
                                     </a>
                                 </li>
                                 <li class="">
-                                    <a href="page-add-users.html">
-                                        <i class="las la-minus"></i><span>Add Users</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-list-suppliers.html">
-                                        <i class="las la-minus"></i><span>Fournisseurs</span>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="page-add-supplier.html">
-                                        <i class="las la-minus"></i><span>Add Suppliers</span>
+                                    <a href="{{path ('create_fournisseur')}}">
+                                        <i class="las la-minus"></i><span>Ajouter Un Fournisseur</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
+
+
 
 
                     </ul>
@@ -586,6 +482,7 @@
         </div>
         <div class="content-page">
             <div class="container-fluid">
+                {% block contenu %}
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="card card-transparent card-block card-stretch card-height border-none">
@@ -952,6 +849,8 @@
                         </div>
                     </div>
                 </div>
+                {% endblock contenu %}
+
                 <!-- Page end  -->
             </div>
         </div>

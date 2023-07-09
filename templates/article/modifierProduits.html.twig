@@ -1,0 +1,70 @@
+{% extends "main/template.html.twig" %}
+
+{% block contenu %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Modifier Un Article </h4>
+                </div>
+            </div>
+            <div class="card-body">
+                {{form_start(formulaire)}}
+               
+                    <div class="row">
+                        <div class="col-md-6">   
+
+                            <div class="form-group">
+                                {{ form_label (formulaire.nomArticle,"Nom *")}}
+                                {{form_widget(formulaire.nomArticle, {'attr':{class:'form-control',"placeholder":"Entrer le nom de l'article"}})}} 
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+                        </div>    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Categorie *</label>
+                                <select name="type" class="selectpicker form-control" data-style="py-0">
+                                    <option>Beauty</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label (formulaire.quantiteArticle,"Quantité *")}}
+                                {{form_widget(formulaire.quantiteArticle, {'attr':{class:'form-control',"placeholder":"Entrer la quantité de l'article"}})}} 
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form_label (formulaire.prixArticle,"Prix *")}}
+                                {{form_widget(formulaire.prixArticle, {'attr':{class:'form-control',"placeholder":"Entrer le prix de l'article"}})}} 
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ form_label (formulaire.imageFile,"Image")}}
+                                {{form_widget(formulaire.imageFile, {'attr':{class:'form-control image-file',"placeholder":"Entrer le nom de l'article"}})}} 
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{ form_label (formulaire.description,"Description/ Détails sur l'article")}}
+                                {{form_widget(formulaire.description, {'attr':{class:'form-control image-file',"placeholder":"Entrer le nom de l'article"}})}} 
+                            </div>
+                        </div>
+                    </div>                            
+                    <button type="submit" class="btn btn-primary mr-2">modifier</button>
+                    <button type="reset" class="btn btn-danger">Nettoyer</button>
+                
+                {{form_end(formulaire)}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenu %}
