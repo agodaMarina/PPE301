@@ -30,10 +30,10 @@ class ArticleType extends AbstractType
 
             ->add('imageFile',VichImageType::class)
 
-            //->add('categorie', EntityType::class, [
-               // 'class' => Categories::class, 
-               // 'choice_label' => 'libelle'
-            //])
+            ->add('categorie', EntityType::class, [
+               'class' => Categories::class, 
+                'choice_label' => 'libelle'
+            ])
         ;
     }
 
