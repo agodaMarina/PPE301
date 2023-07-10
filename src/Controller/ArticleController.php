@@ -32,7 +32,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/read', name: 'liste_article')]
-    public function read(ArticleRepository $articleRepository): Response
+    public function read(ArticleRepository $articleRepository, Article $article): Response
     {
         $listeArticle = $articleRepository->findAll();
         return $this->render('article/listeProduits.html.twig', [

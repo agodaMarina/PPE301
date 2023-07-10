@@ -5,11 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\component\HttpFoundation\File\UploadedFile;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-
-
+//use Vich\UploaderBundle\Entity\File;
+use Symfony\component\HttpFoundation\File\File;
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 
 #[Vich\Uploadable]
@@ -47,6 +47,7 @@ class Article
 
     #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'article')]
     private Collection $fournisseurs;
+
 
     public function __construct()
     {
@@ -106,6 +107,16 @@ class Article
         return $this;
     }
 
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            //$this->updatedAt = new \DateTimeImmutable();
+        }
+    }
     public function getImageFile(): ?File
     {
         return $this->imageFile;
@@ -169,4 +180,6 @@ class Article
 
         return $this;
     }
+
+    
 }

@@ -23,17 +23,16 @@
                             <label for="checkbox1" class="mb-0"></label>
                         </div>
                     </th>
-                    <th>Product</th>
-                    <th>Code</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Brand Name</th>
-                    <th>Cost</th>
-                    <th>Quantity</th>
+                    <th>Nom</th>
+                    <th>Categorie</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody class="ligth-body">
+                {% for article in articles %}   
+                
                 <tr>
                     <td>
                         <div class="checkbox d-inline-block">
@@ -50,12 +49,11 @@
                             </div>
                         </div>
                     </td>
-                    <td>CREM01</td>
-                    <td>Beauty</td>
-                    <td>$25.00</td>
-                    <td>Lakme</td>
-                    <td>$10.00</td>
-                    <td>10.0</td>
+                    <td>{{article.nomArticle}}</td>
+                    <td>{{article.categorie}}</td>
+                    <td>{{article.prixArticle}}</td>
+                    
+                    
                     <td>
                         <div class="d-flex align-items-center list-action">
                             <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
@@ -67,7 +65,8 @@
                         </div>
                     </td>
                 </tr>
-                
+
+                {% endfor %}
             </tbody>
         </table>
         </div>

@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Article;
+use App\Entity\Categorie;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -28,10 +30,15 @@ class ArticleType extends AbstractType
             ->add('quantiteArticle',IntegerType::class
                 )
 
-            ->add('imageFile',VichImageType::class)
+            ->add('imageFile',VichImageType::class,[
+                'required' => false,
+                'download_uri' => true,
+                'image_uri' => true
+            ])
+
 
             ->add('categorie', EntityType::class, [
-               'class' => Categories::class, 
+               'class' => Categorie::class, 
                 'choice_label' => 'libelle'
             ])
         ;

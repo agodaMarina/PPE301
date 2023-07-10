@@ -71,6 +71,6 @@ class CategorieController extends AbstractController
         if($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))){
             $categorieRepository->remove($categorie, true);
         }
-        return $this->redirectToRoute('liste_categorie');
+        return $this->redirectToRoute('liste_categorie',[], Response::HTTP_SEE_OTHER);
     }
 }
