@@ -1,0 +1,60 @@
+{% extends "main/template.html.twig" %}
+
+{% block contenu %}
+    
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Article : {{article.nomArticle}}</h4>
+                </div>
+            </div>
+            <div class="card-body">
+               
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ article.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ article.nomArticle }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prix</th>
+                            <td>{{ article.prixArticle }}</td>
+                        </tr>
+             
+                        <tr>
+                            <th>Quantité</th>
+                            <td>{{ article.quantiteArticle }}</td>
+                        </tr>
+
+                         {# <tr>
+                            <th>Categorie</th>
+                            <td>{{ article.categorie }}</td>
+                        </tr>  #}
+
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ article.description}}</td>
+                        </tr>
+                       
+                        <img src="{{vich_uploader_asset(article,'imageFile')}}" alt="" style="width:150px">
+                    </tbody>
+                </table>
+            
+                <a href="{{ path('liste_article') }}"class="btn btn-success mt-2">Liste</a>
+            
+                <a href="{{ path('update_article', {'id': article.id})}}"class="btn btn-primary mt-2">Modifier</a>
+            
+                {{ include('article/delete.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenu %}

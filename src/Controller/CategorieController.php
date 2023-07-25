@@ -43,7 +43,7 @@ class CategorieController extends AbstractController
     public function show(Categorie $categorie): Response
     {   
         
-        return $this->render('categorie/index.html.twig', [
+        return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie,
         ]);
     }

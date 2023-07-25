@@ -32,7 +32,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/read', name: 'liste_article')]
-    public function read(ArticleRepository $articleRepository, Article $article): Response
+    public function read(ArticleRepository $articleRepository): Response
     {
         $listeArticle = $articleRepository->findAll();
         return $this->render('article/listeProduits.html.twig', [
@@ -43,9 +43,9 @@ class ArticleController extends AbstractController
     #[Route('/detail/{id}', name: 'detail_article')]
     public function show(Article $article): Response
     {
-
-        return $this->render('article/listeProduits.html.twig', [
+        return $this->render('article/show.html.twig', [
             'article' => $article,
+
         ]);
     }
 
@@ -63,6 +63,7 @@ class ArticleController extends AbstractController
         }
         return $this->render('article/modifierProduits.html.twig', [
             'formulaire' => $formulaire->createView(),
+            'article'=>$article
         ]);
     }
 

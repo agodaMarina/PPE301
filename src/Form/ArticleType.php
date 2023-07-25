@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Repository\CategorieRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -24,7 +25,9 @@ class ArticleType extends AbstractType
             ->add('description', TextareaType::class
                 )
 
-            ->add('prixArticle', MoneyType::class
+            ->add('prixArticle', MoneyType::class,[
+                'currency' => 'XOF'
+            ]
                 )
 
             ->add('quantiteArticle',IntegerType::class
@@ -33,14 +36,30 @@ class ArticleType extends AbstractType
             ->add('imageFile',VichImageType::class,[
                 'required' => false,
                 'download_uri' => true,
-                'image_uri' => true
+                'image_uri' => true,
+                'delete_label' => 'supprimer',
+                'download_label' => 'télécharger',
+                'allow_delete' => true
             ])
 
 
             ->add('categorie', EntityType::class, [
                'class' => Categorie::class, 
+               'query_builder'=> function(CategorieRepository $cat){
+                    return $cat->createQueryBuilder('u')
+                        ->orderBy('u.libelle','ASC');
+               },
                 'choice_label' => 'libelle'
             ])
+        
+            // ->add('fournisseur', EntityType::class, [
+            //    'class' => Fournisseur::class, 
+            //    'query_builder'=> function(FournisseurRepository $fourni){
+            //         return $fourni->createQueryBuilder('u')
+            //             ->orderBy('u.nomFournisseur','ASC');
+            //    },
+            //     'choice_label' => 'nomFournisseur'
+            // ])
         ;
     }
 

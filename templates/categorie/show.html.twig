@@ -1,0 +1,54 @@
+{% extends "main/template.html.twig" %}
+
+{% block contenu %}
+    
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">fournisseur : {{fournisseur.nomFournisseur}}</h4>
+                </div>
+            </div>
+            <div class="card-body">
+               
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ fournisseur.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ fournisseur.nomFournisseur }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ fournisseur.adresseFournisseur }}</td>
+                        </tr>
+             
+                        <tr>
+                            <th>Contact</th>
+                            <td>{{ fournisseur.contactFournisseur }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ fournisseur.emailFournisseur}}</td>
+                        </tr>
+                       
+                       
+                    </tbody>
+                </table>
+            
+                <a href="{{ path('read_fournisseur') }}"class="btn btn-success mt-2">Liste</a>
+            
+                <a href="{{ path('update_fournisseur', {'id': fournisseur.id}) }}"class="btn btn-primary mt-2">Modifier</a>
+            
+                {{ include('categorie/delete.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenu %}
