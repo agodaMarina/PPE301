@@ -23,6 +23,10 @@ class CategorieController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $categorieRepository->save($categorie, true);
+            $this->addFlash(
+                'notice : ',
+                'la catégorie a été créée avec succès !'
+            );
             return $this->redirectToRoute('create_categorie');
         }
         return $this->render('categorie/ajoutCategories.html.twig', [
@@ -57,10 +61,15 @@ class CategorieController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $categorieRepository->save($categorie, true);
-            return $this->redirectToRoute('create_categorie');
+            $this->addFlash(
+                'notice : ',
+                'la catégorie a été modifiée avec succès !'
+            );
+            return $this->redirectToRoute('liste_categorie');
         }
-        return $this->render('categorie/ajoutCategories.html.twig', [
-            'formulaire' => $formulaire,
+        return $this->render('categorie/modifierCategories.html.twig', [
+            'formulaire' => $formulaire->createView(),
+            'categorie'=> $categorie
         ]);
     }
 

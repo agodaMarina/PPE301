@@ -24,6 +24,10 @@ class ArticleController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $articleRepository->save($article, true);
+            $this->addFlash(
+                'notice : ',
+                'nouvel article créé avec succès !'
+            );
             return $this->redirectToRoute('create_article');
         }
         return $this->render('article/ajoutProduits.html.twig', [
@@ -59,7 +63,11 @@ class ArticleController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $articleRepository->save($article, true);
-            return $this->redirectToRoute('create_article');
+            $this->addFlash(
+                'notice : ',
+                'l\'article a été modifié avec succès !'
+            );
+            return $this->redirectToRoute('liste_article');
         }
         return $this->render('article/modifierProduits.html.twig', [
             'formulaire' => $formulaire->createView(),

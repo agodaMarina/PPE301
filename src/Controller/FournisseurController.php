@@ -24,6 +24,10 @@ class FournisseurController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $fournisseurRepository->save($fournisseur, true);
+            $this->addFlash(
+                'notice : ',
+                'le Fournisseur a été créé avec succès !'
+            );
             return $this->redirectToRoute('create_fournisseur');
         }
         return $this->render('fournisseur/ajoutFournisseurs.html.twig', [
@@ -60,10 +64,15 @@ class FournisseurController extends AbstractController
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $fournisseurRepository->save($fournisseur, true);
-            return $this->redirectToRoute('create_fournisseur');
+            $this->addFlash(
+                'notice : ',
+                'le Fournisseur a été modifié avec succès !'
+            );
+            return $this->redirectToRoute('read_fournisseur');
         }
-        return $this->render('fournisseur/ajoutFournisseurs.html.twig', [
+        return $this->render('fournisseur/modifierFournisseurs.html.twig', [
             'formulaire' => $formulaire->createView(),
+            'fournisseur'=> $fournisseur
         ]);
     }
 

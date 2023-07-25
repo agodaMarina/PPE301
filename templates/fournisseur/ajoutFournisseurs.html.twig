@@ -1,9 +1,17 @@
 {% extends "main/template.html.twig" %}
 
 {% block contenu %}
-    
+
 <div class="row">
     <div class="col-sm-12">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">
+            <div class="iq-alert-text">
+                {{message}}
+            </div>
+        </div>
+        {% endfor %}
+        
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
@@ -12,43 +20,47 @@
             </div>
             <div class="card-body">
                 {{form_start(formulaire)}}
-                
-                    <div class="row"> 
-                        <div class="col-md-6">                      
-                            <div class="form-group">
-                                {{form_label(formulaire.nomFournisseur, "Nom *")}}
-                                {{form_widget(formulaire.nomFournisseur, {'attr':{class:'form-control', "placeholder": "Veuillez entrer le nom"}})}}
-                                {{form_errors(formulaire.nomFournisseur, {'attr':{class:'help-block with-errors'}})}}
-                            </div>
-                        </div>    
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{form_label(formulaire.emailFournisseur, "Email *")}}
-                                {{form_widget(formulaire.emailFournisseur, {'attr':{class:'form-control', "placeholder": "Veuillez entrer l'email"}})}}
-                                {{form_errors(formulaire.emailFournisseur, {'attr':{class:'help-block with-errors'}})}}
-                            </div>
-                        </div> 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{form_label(formulaire.contactFournisseur, "Contact *")}}
-                                {{form_widget(formulaire.contactFournisseur, {'attr':{class:'form-control', "placeholder": "Veuillez entrer le contact" }})}}
-                                {{form_errors(formulaire.contactFournisseur, {'attr':{class:'help-block with-errors'}})}}
-                            </div>
-                        </div> 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{form_label(formulaire.adresseFournisseur, "Adresse *")}}
-                                {{form_widget(formulaire.adresseFournisseur, {'attr':{class:'form-control', "placeholder": "Veuillez entrer l'adresse" }})}}
-                                {{form_errors(formulaire.adresseFournisseur, {'attr':{class:'help-block with-errors'}})}}
-                            </div>
-                       
-                    </div>                            
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{form_label(formulaire.nomFournisseur, "Nom *")}}
+                            {{form_widget(formulaire.nomFournisseur, {'attr':{class:'form-control', "placeholder":
+                            "Veuillez entrer le nom"}})}}
+                            {{form_errors(formulaire.nomFournisseur, {'attr':{class:'help-block with-errors'}})}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{form_label(formulaire.emailFournisseur, "Email *")}}
+                            {{form_widget(formulaire.emailFournisseur, {'attr':{class:'form-control', "placeholder":
+                            "Veuillez entrer l'email"}})}}
+                            {{form_errors(formulaire.emailFournisseur, {'attr':{class:'help-block with-errors'}})}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{form_label(formulaire.contactFournisseur, "Contact *")}}
+                            {{form_widget(formulaire.contactFournisseur, {'attr':{class:'form-control', "placeholder":
+                            "Veuillez entrer le contact" }})}}
+                            {{form_errors(formulaire.contactFournisseur, {'attr':{class:'help-block with-errors'}})}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{form_label(formulaire.adresseFournisseur, "Adresse *")}}
+                            {{form_widget(formulaire.adresseFournisseur, {'attr':{class:'form-control', "placeholder":
+                            "Veuillez entrer l'adresse" }})}}
+                            {{form_errors(formulaire.adresseFournisseur, {'attr':{class:'help-block with-errors'}})}}
+                        </div>
+
+                    </div>
                     <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
                     <button type="reset" class="btn btn-danger">Nettoyer</button>
-                {{form_end(formulaire)}}
+                    {{form_end(formulaire)}}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-{% endblock contenu %}
+    {% endblock contenu %}

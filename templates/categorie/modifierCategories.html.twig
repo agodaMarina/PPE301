@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                    <h4 class="card-title">Modifier une Categorie</h4>
+                    <h4 class="card-title">Modifier La Categorie : {{categorie.libelle}}</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 
                                 {{ form_label (formulaire.libelle,"libellé")}}
-                                {{form_widget(formulaire.libelle, {'attr':{class:'form-control',"placeholder":"Entrer le libellé"}})}} 
+                                {{form_widget(formulaire.libelle, {'attr':{class:'form-control'}})}} 
                                 
                                 <div class="help-block with-errors"></div>
                             </div>
