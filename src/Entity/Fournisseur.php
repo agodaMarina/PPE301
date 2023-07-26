@@ -6,6 +6,7 @@ use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
 class Fournisseur
@@ -28,6 +29,7 @@ class Fournisseur
     private ?string $emailFournisseur = null;
 
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'fournisseurs')]
+    #[JoinTable(name:'LigneCommande')]
     private Collection $article;
 
     public function __construct()

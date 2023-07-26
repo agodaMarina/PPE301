@@ -45,6 +45,12 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ form_label (formulaire.fournisseurs,"Fournisseur (s) *")}}
+                                {{form_widget(formulaire.fournisseurs, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}} 
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 {{ form_label (formulaire.imageFile,"Image")}}
                                 {{form_widget(formulaire.imageFile, {'attr':{class:'form-control image-file'}})}} 
                             </div>

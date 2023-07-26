@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Article;
 use App\Entity\Categorie;
+use App\Entity\Fournisseur;
 use App\Repository\CategorieRepository;
+use App\Repository\FournisseurRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -52,14 +54,17 @@ class ArticleType extends AbstractType
                 'choice_label' => 'libelle'
             ])
         
-            // ->add('fournisseur', EntityType::class, [
-            //    'class' => Fournisseur::class, 
-            //    'query_builder'=> function(FournisseurRepository $fourni){
-            //         return $fourni->createQueryBuilder('u')
-            //             ->orderBy('u.nomFournisseur','ASC');
-            //    },
-            //     'choice_label' => 'nomFournisseur'
-            // ])
+            ->add('fournisseurs', EntityType::class, [
+               'class' => Fournisseur::class, 
+               'query_builder'=> function(FournisseurRepository $fourni){
+                    return $fourni->createQueryBuilder('u')
+                        ->orderBy('u.nomFournisseur','ASC');
+               },
+                'choice_label' => 'nomFournisseur',
+                'multiple'=> true,
+                'expanded'=>false,
+                
+            ])
         ;
     }
 
