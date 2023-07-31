@@ -46,9 +46,10 @@ class CategorieController extends AbstractController
     #[Route('/detail/{id}', name: 'detail_categorie')]
     public function show(Categorie $categorie): Response
     {   
-        
+        $articles=$categorie->getArticles();
         return $this->render('categorie/show.html.twig', [
             'categorie' => $categorie,
+            'article'=>$articles,
         ]);
     }
 

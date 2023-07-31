@@ -29,7 +29,7 @@ class Fournisseur
     private ?string $emailFournisseur = null;
 
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'fournisseurs')]
-    #[JoinTable(name:'LigneCommande')]
+    #[JoinTable(name:'LigneArticle')]
     private Collection $article;
 
     public function __construct()
@@ -113,4 +113,8 @@ class Fournisseur
 
         return $this;
     }
+
+    
+
+    
 }

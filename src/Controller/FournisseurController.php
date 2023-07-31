@@ -48,9 +48,10 @@ class FournisseurController extends AbstractController
     public function show(Fournisseur $fournisseur): Response
     {
 
-        
+        $articles=$fournisseur->getArticle();
         return $this->render('fournisseur/show.html.twig', [
             'fournisseur' => $fournisseur,
+            'articles'=>$articles,
         ]);
     }
 

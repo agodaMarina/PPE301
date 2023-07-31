@@ -186,5 +186,8 @@ class Article
         return $this->nomArticle;
     }
 
+    public function toArray(){
+        return $this->fournisseurs;
+    }
     
 }

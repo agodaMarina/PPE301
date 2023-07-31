@@ -15,10 +15,7 @@
 
                 <table class="table">
                     <tbody>
-                        <tr>
-                            <th>Id</th>
-                            <td>{{ article.id }}</td>
-                        </tr>
+                       
                         <tr>
                             <th>Nom</th>
                             <td>{{ article.nomArticle }}</td>
@@ -29,14 +26,22 @@
                         </tr>
              
                         <tr>
-                            <th>Quantité</th>
+                            <th>Quantité en stock</th>
                             <td>{{ article.quantiteArticle }}</td>
                         </tr>
 
-                         {# <tr>
+                         <tr>
                             <th>Categorie</th>
                             <td>{{ article.categorie }}</td>
-                        </tr>  #}
+                        </tr> 
+                        <tr>
+                            <th>Fournisseur(s)</th>
+                            <td>{% for row in fournisseurs %}
+                                <a href="{{path ('detail_fournisseur',{'id':row.id})}}">{{row.nomFournisseur}}</a>
+                                {# {% else %}
+                                Aucun Fournisseur retenu pour cet article #}
+                            {% endfor %}</td>
+                        </tr> 
 
                         <tr>
                             <th>Description</th>
@@ -51,7 +56,12 @@
             
                 <a href="{{ path('update_article', {'id': article.id})}}"class="btn btn-primary mt-2">Modifier</a>
             
-                {{ include('article/delete.html.twig') }}
+                
+                    <form method="post" action="{{ path('delete_article', {'id': article.id}) }}" onsubmit="return confirm('Etes-Vous sûr de supprimer ce élément ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ article.id) }}">
+                        <button class="btn btn-warning mt-2">Supprimer</button>
+                    </form> 
+            
             </div>
         </div>
     </div>

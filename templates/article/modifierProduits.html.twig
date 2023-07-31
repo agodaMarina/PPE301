@@ -45,6 +45,12 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
+                                {{ form_label (formulaire.fournisseurs,"Fournisseur (s) *")}}
+                                {{form_widget(formulaire.fournisseurs, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}} 
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
                                 {{ form_label (formulaire.imageFile,"Image")}}
                                 {{form_widget(formulaire.imageFile, {'attr':{class:'form-control image-file'}})}} 
                             </div>
@@ -57,8 +63,8 @@
                         </div>
                     </div>                            
                     <button type="submit" class="btn btn-primary mr-2">Modifier</button>
-                    <button type="reset" class="btn btn-danger">Nettoyer</button>
-                
+                   
+                <a href="{{ path('liste_article') }}"class="btn btn-success mr-2">Retour</a>
                 {{form_end(formulaire)}}
             </div>
         </div>

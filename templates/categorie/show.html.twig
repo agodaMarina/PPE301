@@ -16,12 +16,14 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th>Id</th>
-                            <td>{{ categorie.id }}</td>
-                        </tr>
-                        <tr>
                             <th>Nom</th>
                             <td>{{ categorie.libelle }}</td>
+                        </tr>
+                        <tr>
+                            <th>articles</th>
+                            <td>{% for row in article %}
+                                {{ row.nomArticle}}
+                            {% endfor %}</td>
                         </tr>
 
                     </tbody>

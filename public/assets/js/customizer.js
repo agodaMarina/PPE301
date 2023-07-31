@@ -1,4 +1,4 @@
-/*(function (jQuery) {
+(function (jQuery) {
     "use strict";
     // data-mode="click" for using event
     // data-dark="false" for property
@@ -49,4 +49,4 @@
         localStorage.setItem('dark', dark)
     }
     
-})(jQuery)*/
+})(jQuery)
