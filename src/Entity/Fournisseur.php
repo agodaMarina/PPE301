@@ -32,9 +32,13 @@ class Fournisseur
     #[JoinTable(name:'LigneArticle')]
     private Collection $article;
 
+    #[ORM\OneToMany(mappedBy: 'fournisseur', targetEntity: CommandeAchat::class)]
+    private Collection $commande;
+
     public function __construct()
     {
         $this->article = new ArrayCollection();
+        $this->commande = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -110,6 +114,36 @@ class Fournisseur
     public function removeArticle(Article $article): static
     {
         $this->article->removeElement($article);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeAchat>
+     */
+    public function getCommande(): Collection
+    {
+        return $this->commande;
+    }
+
+    public function addCommande(CommandeAchat $commande): static
+    {
+        if (!$this->commande->contains($commande)) {
+            $this->commande->add($commande);
+            $commande->setFournisseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(CommandeAchat $commande): static
+    {
+        if ($this->commande->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getFournisseur() === $this) {
+                $commande->setFournisseur(null);
+            }
+        }
 
         return $this;
     }

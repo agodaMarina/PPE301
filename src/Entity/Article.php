@@ -48,10 +48,14 @@ class Article
     #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'article')]
     private Collection $fournisseurs;
 
+    #[ORM\ManyToMany(targetEntity: CommandeAchat::class, mappedBy: 'articles')]
+    private Collection $commandeAchats;
+
 
     public function __construct()
     {
         $this->fournisseurs = new ArrayCollection();
+        $this->commandeAchats = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,6 +192,33 @@ class Article
 
     public function toArray(){
         return $this->fournisseurs;
+    }
+
+    /**
+     * @return Collection<int, CommandeAchat>
+     */
+    public function getCommandeAchats(): Collection
+    {
+        return $this->commandeAchats;
+    }
+
+    public function addCommandeAchat(CommandeAchat $commandeAchat): static
+    {
+        if (!$this->commandeAchats->contains($commandeAchat)) {
+            $this->commandeAchats->add($commandeAchat);
+            $commandeAchat->addArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeAchat(CommandeAchat $commandeAchat): static
+    {
+        if ($this->commandeAchats->removeElement($commandeAchat)) {
+            $commandeAchat->removeArticle($this);
+        }
+
+        return $this;
     }
     
 }
