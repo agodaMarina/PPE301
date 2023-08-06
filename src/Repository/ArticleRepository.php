@@ -63,13 +63,18 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-//    public function nombreArticle(): int 
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+  public function findOneByIdJoinedToSupplier(int $productId): ?Article
+{
+    $entityManager = $this->getEntityManager();
+
+    $query = $entityManager->createQuery(
+        'SELECT f.nomFournisseur
+        FROM App\Entity\Article a
+        INNER JOIN a.fournisseurs f
+        WHERE a.id = :id'
+    )->setParameter('id', $productId);
+
+    return $query->getOneOrNullResult();
+}
+
 }

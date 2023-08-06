@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\component\HttpFoundation\File\UploadedFile;
 use App\Repository\ArticleRepository;
+use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping as ORM;
 //use Vich\UploaderBundle\Entity\File;
 use Symfony\component\HttpFoundation\File\File;
@@ -45,17 +46,24 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categorie = null;
 
-    #[ORM\ManyToMany(targetEntity: Fournisseur::class, mappedBy: 'article')]
-    private Collection $fournisseurs;
+ 
 
     #[ORM\ManyToMany(targetEntity: CommandeAchat::class, mappedBy: 'articles')]
     private Collection $commandeAchats;
 
+    #[ORM\ManyToMany(targetEntity: Fournisseur::class, inversedBy: 'articles')]
+    #[ORM\JoinTable(name:"ligneArticle")]
+    private Collection $fournisseurs;
+
+    #[ORM\OneToOne(inversedBy: 'article', cascade: ['persist', 'remove'])]
+    private ?Stock $stock = null;
+
 
     public function __construct()
     {
-        $this->fournisseurs = new ArrayCollection();
+        
         $this->commandeAchats = new ArrayCollection();
+        $this->fournisseurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -158,41 +166,15 @@ class Article
         return $this;
     }
 
-    /**
-     * @return Collection<int, Fournisseur>
-     */
-    public function getFournisseurs(): Collection
-    {
-        return $this->fournisseurs;
-    }
+   
 
-    public function addFournisseur(Fournisseur $fournisseur): static
-    {
-        if (!$this->fournisseurs->contains($fournisseur)) {
-            $this->fournisseurs->add($fournisseur);
-            $fournisseur->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFournisseur(Fournisseur $fournisseur): static
-    {
-        if ($this->fournisseurs->removeElement($fournisseur)) {
-            $fournisseur->removeArticle($this);
-        }
-
-        return $this;
-    }
 
     public function __toString()
     {
         return $this->nomArticle;
     }
 
-    public function toArray(){
-        return $this->fournisseurs;
-    }
+   
 
     /**
      * @return Collection<int, CommandeAchat>
@@ -217,6 +199,42 @@ class Article
         if ($this->commandeAchats->removeElement($commandeAchat)) {
             $commandeAchat->removeArticle($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fournisseur>
+     */
+    public function getFournisseurs(): Collection
+    {
+        return $this->fournisseurs;
+    }
+
+    public function addFournisseur(Fournisseur $fournisseur): static
+    {
+        if (!$this->fournisseurs->contains($fournisseur)) {
+            $this->fournisseurs->add($fournisseur);
+        }
+
+        return $this;
+    }
+
+    public function removeFournisseur(Fournisseur $fournisseur): static
+    {
+        $this->fournisseurs->removeElement($fournisseur);
+
+        return $this;
+    }
+
+    public function getStock(): ?Stock
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?Stock $stock): static
+    {
+        $this->stock = $stock;
 
         return $this;
     }

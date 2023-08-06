@@ -25,7 +25,7 @@ class FournisseurController extends AbstractController
 
             $fournisseurRepository->save($fournisseur, true);
             $this->addFlash(
-                'notice : ',
+                'notice',
                 'le Fournisseur a été créé avec succès !'
             );
             return $this->redirectToRoute('create_fournisseur');
@@ -66,7 +66,7 @@ class FournisseurController extends AbstractController
 
             $fournisseurRepository->save($fournisseur, true);
             $this->addFlash(
-                'notice : ',
+                'notice',
                 'le Fournisseur a été modifié avec succès !'
             );
             return $this->redirectToRoute('read_fournisseur');

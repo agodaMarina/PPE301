@@ -2,17 +2,58 @@
 
 namespace App\Controller;
 
+use App\Entity\Tva;
+use App\Form\TvaType;
+use App\Repository\TvaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/Tva')]
 class TvaController extends AbstractController
 {
-    #[Route('/tva', name: 'app_tva')]
-    public function index(): Response
+    #[Route('/read', name: 'liste_tva')]
+    public function index(TvaRepository $tvaRepository): Response
     {
-        return $this->render('tva/index.html.twig', [
-            'controller_name' => 'TvaController',
+        $tva= $tvaRepository->findAll();
+        return $this->render('tva/listeTva.html.twig', [
+            'tvas' => $tva,
+        ]);
+    }
+    #[Route('/create', name: 'create_tva')]
+    public function create(TvaRepository $tvaRepository, Request $request): Response
+    {
+        $tva=new Tva();
+        $formulaire=$this->createForm(TvaType::class, $tva);
+        $formulaire->handleRequest($request);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $tvaRepository->save($tva, true);
+            $this->addFlash(
+                'notice',
+                'nouvelle Tva créée avec succès !'
+            );
+            return $this->redirectToRoute('create_tva');
+        }
+        return $this->render('tva/AjouterTva.html.twig', [
+            'formulaire' => $formulaire->createView(),
+        ]);
+    }
+    #[Route('/update/{id}', name: 'update_tva')]
+    public function update(TvaRepository $tvaRepository, Tva $tva, Request $request): Response
+    {
+        $formulaire=$this->createForm(TvaType::class, $tva);
+        $formulaire->handleRequest($request);
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
+            $tvaRepository->save($tva, true);
+            $this->addFlash(
+                'notice',
+                ' Tva modifiée avec succès !'
+            );
+            return $this->redirectToRoute('liste_tva');
+        }
+        return $this->render('tva/ModifierTva.html.twig', [
+            'formulaire' => $formulaire->createView(),
         ]);
     }
 }

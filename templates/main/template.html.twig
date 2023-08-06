@@ -5,21 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>
-            {% block title %}ERP{% endblock title %}
-        </title>
-    
+    <title>
+        {% block title %}Dashboard{% endblock title %}
+    </title>
+
 
 
     {% block style %}
     <!-- Favicon -->
-        <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
-        <link rel="stylesheet" href="{{asset ('../assets/css/backend-plugin.min.css')}}">
-        <link rel="stylesheet" href="{{ asset ('../assets/css/backende209.css?v=1.0.0')}}">
-        <link rel="stylesheet" href="{{asset ('../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
-        <link rel="stylesheet"
-            href="{{asset ('../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{asset ('../assets/vendor/remixicon/fonts/remixicon.css')}}">
+    <link rel="shortcut icon" href="https://templates.iqonic.design/posdash/html/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="{{asset ('../assets/css/backend-plugin.min.css')}}">
+    <link rel="stylesheet" href="{{ asset ('../assets/css/backende209.css?v=1.0.0')}}">
+    <link rel="stylesheet" href="{{asset ('../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset ('../assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset ('../assets/vendor/remixicon/fonts/remixicon.css')}}">
     {% endblock style %}
 
 </head>
@@ -165,25 +165,70 @@
 
                         <li class=" ">
                             <a href="#purchase" class="collapsed" data-toggle="collapse" aria-expanded="false">
-                                <svg class="svg-icon" id="p-dash5" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
                                     <line x1="1" y1="10" x2="23" y2="10"></line>
                                 </svg>
                                 <span class="ml-4">Achats</span>
-                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="10 15 15 20 20 15"></polyline><path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
                                 </svg>
                             </a>
                             <ul id="purchase" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                                    <li class="">
-                                            <a href="{{path ('liste_article')}}">
-                                                <i class="ri-subtract-fill"></i><span>Liste des commandes</span>
-                                            </a>
-                                    </li>
-                                    <li class="">
-                                             <a href="{{path ('create_article')}}"> 
-                                                <i class="ri-subtract-fill"></i><span>Nouvelle commande</span>
-                                            </a>
-                                    </li>
+                                <li class="">
+                                    <a href="{{path('liste_commande')}}">
+                                        <i class="ri-subtract-fill"></i><span>Liste Des Commandes</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="{{path('create_commande')}}">
+                                        <i class="ri-subtract-fill"></i><span>Nouvelle Commande</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="{{path('liste_tva')}}">
+                                        <i class="ri-subtract-fill"></i><span>Tva</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class=" ">
+                            <a href="#profiles" class="collapsed" data-toggle="collapse" aria-expanded="false">
+                                <svg class="svg-icon" id="p-dash5" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="10" x2="23" y2="10"></line>
+                                </svg>
+                                <span class="ml-4">Personnel</span>
+                                <svg class="svg-icon iq-arrow-right arrow-active" width="20" height="20"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="10 15 15 20 20 15"></polyline>
+                                    <path d="M4 4h7a4 4 0 0 1 4 4v12"></path>
+                                </svg>
+                            </a>
+                            <ul id="profiles" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                <li class="">
+                                    <a href="{{path('liste_commande')}}">
+                                        <i class="ri-subtract-fill"></i><span>Liste Du Personnel</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="{{path('create_commande')}}">
+                                        <i class="ri-subtract-fill"></i><span>Ajouter Un Employé</span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
 
@@ -203,7 +248,7 @@
                         <i class="ri-menu-line wrapper-menu"></i>
                         <a href="index.html" class="header-logo">
                             <img src="{{('../assets/images/logo.png')}}" class="img-fluid rounded-normal" alt="logo">
-                            <h5 class="logo-title ml-3">POSDash</h5>
+                            <h5 class="logo-title ml-3">E-manage</h5>
 
                         </a>
                     </div>
@@ -513,7 +558,7 @@
                         <div class="card card-transparent card-block card-stretch card-height border-none">
                             <div class="card-body p-0 mt-lg-2 mt-0">
                                 <h3 class="mb-3">Hi [nom utilisateur]</h3>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -901,6 +946,8 @@
             </div>
         </div>
     </footer>
+    {% block scripts %}
+
     <!-- Backend Bundle JavaScript -->
     <script src="{{asset ('../assets/js/backend-bundle.min.js')}}"></script>
 
@@ -915,6 +962,7 @@
 
     <!-- app JavaScript -->
     <script src="{{asset ('../assets/js/app.js')}}"></script>
+    {% endblock scripts %}
 
     {% endblock body %}
 </body>

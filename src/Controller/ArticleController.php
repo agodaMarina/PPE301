@@ -25,13 +25,13 @@ class ArticleController extends AbstractController
 
             $articleRepository->save($article, true);
             $this->addFlash(
-                'Success : ',
+                'notice',
                 'nouvel article créé avec succès !'
             );
             return $this->redirectToRoute('create_article');
         }
         return $this->render('article/ajoutProduits.html.twig', [
-            'formulaire' => $formulaire,
+            'formulaire' => $formulaire->createView(),
         ]);
     }
 
@@ -45,7 +45,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/detail/{id}', name: 'detail_article')]
-    public function show(Article $article): Response
+    public function show(Article $article, ArticleRepository $articleRepository, $id): Response
     {
         $fournisseurs=$article->getFournisseurs();
         return $this->render('article/show.html.twig', [
@@ -66,7 +66,7 @@ class ArticleController extends AbstractController
 
             $articleRepository->save($article, true);
             $this->addFlash(
-                'Success : ',
+                'notice',
                 'l\'article a été modifié avec succès !'
             );
             return $this->redirectToRoute('liste_article');

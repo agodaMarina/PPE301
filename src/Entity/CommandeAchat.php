@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommandeAchatRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -20,9 +21,6 @@ class CommandeAchat
     #[ORM\Column(unique: true)]
     private ?int $NumeroCommande = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $Date = null;
-
     #[ORM\Column]
     private ?float $TotalHT = null;
 
@@ -35,11 +33,11 @@ class CommandeAchat
     #[ORM\Column(length: 255)]
     private ?string $MontantTotalEnLettre = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ConditionDeReglement = null;
 
     #[ORM\Column]
-    private ?bool $Statut = null;
+    private ?bool $Statut = false;
 
     #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'commandeAchats')]
     #[JoinTable(name:'LigneCommande')]
@@ -53,9 +51,14 @@ class CommandeAchat
     #[ORM\JoinColumn(nullable: false)]
     private ?Fournisseur $fournisseur = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $dateCommande = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->dateCommande= new \DateTimeImmutable();
+        
     }
 
     public function getId(): ?int
@@ -75,17 +78,7 @@ class CommandeAchat
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->Date;
-    }
-
-    public function setDate(\DateTimeInterface $Date): static
-    {
-        $this->Date = $Date;
-
-        return $this;
-    }
+   
 
     public function getTotalHT(): ?float
     {
@@ -206,4 +199,19 @@ class CommandeAchat
 
         return $this;
     }
+
+    public function getDateCommande(): ?\DateTimeImmutable
+    {
+        return $this->dateCommande;
+    }
+
+    public function setDateCommande(\DateTimeImmutable $dateCommande): static
+    {
+        $this->dateCommande = $dateCommande;
+
+        return $this;
+    }
+
+  
+    
 }

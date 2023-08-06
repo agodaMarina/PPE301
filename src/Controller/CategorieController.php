@@ -24,7 +24,7 @@ class CategorieController extends AbstractController
 
             $categorieRepository->save($categorie, true);
             $this->addFlash(
-                'notice : ',
+                'notice',
                 'la catégorie a été créée avec succès !'
             );
             return $this->redirectToRoute('create_categorie');
@@ -63,7 +63,7 @@ class CategorieController extends AbstractController
 
             $categorieRepository->save($categorie, true);
             $this->addFlash(
-                'notice : ',
+                'notice',
                 'la catégorie a été modifiée avec succès !'
             );
             return $this->redirectToRoute('liste_categorie');

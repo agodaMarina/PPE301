@@ -21,9 +21,11 @@
                         </tr>
                         <tr>
                             <th>articles</th>
-                            <td>{% for row in article %}
+                            <td>
+                            {% for row in article %}
                                 {{ row.nomArticle}}
-                            {% endfor %}</td>
+                            {% endfor %}
+                            </td>
                         </tr>
 
                     </tbody>

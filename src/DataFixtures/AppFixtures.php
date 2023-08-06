@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Categorie;
 use App\Entity\Fournisseur;
 use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -12,6 +13,13 @@ use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
+    public function __construct( private ArticleRepository $articleRepository)
+    {
+       
+    }
+    
+        
+    
     public function load(ObjectManager $manager): void
     {
         //faker
@@ -33,8 +41,11 @@ class AppFixtures extends Fixture
                 ->setAdresseFournisseur($faker->address());
            
             $manager->persist($fournisseur);
+            $fournisseurs[] = $fournisseur;
         }
-
+        // $article=$this->articleRepository->findAll();
+        
+       
         for ($i = 0; $i < 20; $i++) {
             $article = new Article();
             $article->setNomArticle($faker->word())
@@ -44,12 +55,18 @@ class AppFixtures extends Fixture
                 ->setImageName( $faker->imageUrl('animals', true)
         );
            
+        
+
+            $article->addFournisseur(
+                $fournisseurs[mt_rand(0, count($fournisseurs)-1)]
+            );
 
             $article->setCategorie($categories[$i]);
            
             $manager->persist($article);
         }
 
+       
         $manager->flush();
     }
 }

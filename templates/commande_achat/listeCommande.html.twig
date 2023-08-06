@@ -1,0 +1,58 @@
+{% extends "main/template.html.twig" %}
+{% block contenu %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+            <div>
+                <h4 class="mb-3">Liste Des Commandes</h4>
+                <p class="mb-0"></p>
+            </div>
+            <a href="{{path ('create_commande')}}" class="btn btn-primary add-list"><i class="ri-add-line"
+                    style="color: #ffffff;"></i>Ajouter</a>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="table-responsive rounded mb-3">
+            <table class="data-table table mb-0 tbl-server-info">
+                <thead class="bg-white text-uppercase">
+                    <tr class="ligth ligth-data">
+
+                        
+                        <th>Référence No</th>
+                      
+                        <th>
+                            Tva
+                        </th>
+                        <th>Total</th>
+                        
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody class="ligth-body">
+                    <tr>
+                        {% for c in Commandes %}
+                            
+                        
+                        
+                        <td>{{c.NumeroCommande}}</td>
+                        <td>{{c.TotalTVA}}</td>
+                        <td>{{c.TotalTTC}}</td>
+                       
+                        
+                        <td>
+                            <div class="d-flex align-items-center list-action">
+                                <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title=""
+                                    data-original-title="View" href="{{path('detail_commande',{ 'id':c.id})}}">
+                                    <i class="ri-eye-line mr-0"></i>
+                                </a>
+
+                            </div>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock contenu %}

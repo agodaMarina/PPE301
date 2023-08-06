@@ -20,6 +20,9 @@ class Stock
     #[ORM\Column(type: Types::SMALLINT)]
     private ?int $quantiteAlerte = null;
 
+    #[ORM\OneToOne(mappedBy: 'stock', cascade: ['persist', 'remove'])]
+    private ?Article $article = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,28 @@ class Stock
     public function setQuantiteAlerte(int $quantiteAlerte): static
     {
         $this->quantiteAlerte = $quantiteAlerte;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($article === null && $this->article !== null) {
+            $this->article->setStock(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($article !== null && $article->getStock() !== $this) {
+            $article->setStock($this);
+        }
+
+        $this->article = $article;
 
         return $this;
     }

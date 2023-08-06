@@ -4,6 +4,13 @@
     
 <div class="row">
     <div class="col-sm-12">
+        {% for message in app.flashes('notice') %}
+        <div class="alert alert-success" role="alert">
+            <div class="iq-alert-text">
+                {{message}}
+            </div>
+         </div>  
+        {% endfor %}
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">

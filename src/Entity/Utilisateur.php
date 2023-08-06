@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
+#[UniqueEntity(fields: ['username'], message: 'il exite déja un compte avec ce nom d\'utilisateur')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -23,6 +23,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length:180)]
     private ?string $email = null;
 
+    #[ORM\Column(length:180)]
+    private ?string $contact = null;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -32,25 +35,39 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $prenom = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    public function getContact(): ?string
+    {
+        return $this->contact;
+    }
+    public function setContact(string $contact): static
+    {
+        $this->contact = $contact;
+        return $this;
+    }
     public function getEmail(): ?string
     {
         return $this->email;
     }
-    public function setEmail(): ?string
+    public function setEmail(String $email): static
     {
-        return $this->email;
+        $this->email= $email;
+        return $this;
     }
 
-    public function getUsername(string $username): static
+    public function getUsername(): ?string
     {
-        $this->username = $username;
-
-        return $this;
+        return $this->username;
     }
     public function setUsername(string $username): static
     {
@@ -110,5 +127,29 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
     }
 }

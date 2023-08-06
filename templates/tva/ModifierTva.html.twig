@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                    <h4 class="card-title">Modifier La Categorie : {{categorie.libelle}}</h4>
+                    <h4 class="card-title">Modifier la  Tva</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -21,20 +21,25 @@
                
                     <div class="row">
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">   
+
                             <div class="form-group">
-                                
-                                {{ form_label (formulaire.libelle,"libellé")}}
-                                {{form_widget(formulaire.libelle, {'attr':{class:'form-control'}})}} 
-                                
+                                {{ form_label (formulaire.Valeur,"Valeur *")}}
+                                {{form_widget(formulaire.valeur, {'attr':{class:'form-control',"placeholder":"Entrer le nom de l'article"}})}} 
                                 <div class="help-block with-errors"></div>
+                            </div>
+
+                        </div>    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{form_label(formulaire.statut,"Statut *")}}
+                                {{form_widget(formulaire.statut, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
                             </div>
                         </div>
 
-
                     </div>
                     <button type="submit" class="btn btn-primary mr-2">Modifier</button>
-                    <button type="reset" class="btn btn-danger">Nettoyer</button>
+                    <a href="{{ path('liste_tva') }}"class="btn btn-success mr-2">Liste</a>
                
                 {{form_end (formulaire)}}
             </div>

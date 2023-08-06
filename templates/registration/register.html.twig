@@ -1,4 +1,4 @@
-{# <!doctype html>
+ <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@
                         <div class="d-flex align-items-center auth-content">
                            <div class="col-lg-7 align-self-center">
                               <div class="p-3">
-                                 <h2 class="mb-2">Sign Up</h2>
+                                 <h2 class="mb-2">Inscription</h2>
                                  <p>Create your POSDash account.</p>
                                  <form>
                                     <div class="row">
@@ -111,23 +111,4 @@
     <!-- app JavaScript -->
     <script src="../assets/js/app.js"></script>
   </body>
-</html> #}
-{% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
-
-{% block body %}
-    <h1>Register</h1>
-
-    {{ form_errors(registrationForm) }}
-
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-{% endblock %}
+</html> 

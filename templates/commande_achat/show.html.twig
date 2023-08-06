@@ -1,0 +1,63 @@
+{% extends "main/template.html.twig" %}
+
+{% block contenu %}
+    
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Commande: {{commande.NumeroCommande}}</h4>
+                </div>
+            </div>
+            <div class="card-body">
+               
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Numero </th>
+                            <td>{{commande.NumeroCommande}}</td>
+                        </tr>
+                        <tr>
+                            <th>Date </th>
+                            <td>{{ commande.Date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Statut </th>
+                            <td>{{ commande.Statut }}</td>
+                        </tr>
+                        <tr>
+                            <th>Article (s) </th>
+                            <td>{% for row in articles %}
+                                {{ row.nomArticle}}
+                            {% endfor %}</td>
+                        </tr>
+                        <tr>
+                            <th>Fournisseur </th>
+                            <td>{{ commande.fournisseur }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tva </th>
+                            <td>{{ commande.TotalTVA }}</td>
+                        </tr>
+                        <tr>
+                            <th>Condition </th>
+                            <td>{{ commande.ConditionDeReglement }}</td>
+                        </tr>
+                        
+
+                    </tbody>
+                </table>
+            
+                <a href="{{ path('liste_commande') }}" class="btn btn-success mt-2">Liste</a>
+            
+               
+            
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenu %}

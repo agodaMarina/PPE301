@@ -28,17 +28,18 @@ class Fournisseur
     #[ORM\Column(length: 255)]
     private ?string $emailFournisseur = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'fournisseurs')]
-    #[JoinTable(name:'LigneArticle')]
-    private Collection $article;
-
+   
     #[ORM\OneToMany(mappedBy: 'fournisseur', targetEntity: CommandeAchat::class)]
     private Collection $commande;
 
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'fournisseurs')]
+    private Collection $articles;
+
     public function __construct()
     {
-        $this->article = new ArrayCollection();
+       
         $this->commande = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,29 +95,7 @@ class Fournisseur
         return $this;
     }
 
-    /**
-     * @return Collection<int, Article>
-     */
-    public function getArticle(): Collection
-    {
-        return $this->article;
-    }
-
-    public function addArticle(Article $article): static
-    {
-        if (!$this->article->contains($article)) {
-            $this->article->add($article);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): static
-    {
-        $this->article->removeElement($article);
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, CommandeAchat>
@@ -149,6 +128,36 @@ class Fournisseur
     }
 
     
+public function __toString()
+{
+    return $this->nomFournisseur;
+}
 
+/**
+ * @return Collection<int, Article>
+ */
+public function getArticles(): Collection
+{
+    return $this->articles;
+}
+
+public function addArticle(Article $article): static
+{
+    if (!$this->articles->contains($article)) {
+        $this->articles->add($article);
+        $article->addFournisseur($this);
+    }
+
+    return $this;
+}
+
+public function removeArticle(Article $article): static
+{
+    if ($this->articles->removeElement($article)) {
+        $article->removeFournisseur($this);
+    }
+
+    return $this;
+}
     
 }

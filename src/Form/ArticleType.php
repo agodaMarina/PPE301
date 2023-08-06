@@ -40,7 +40,6 @@ class ArticleType extends AbstractType
                 'download_uri' => true,
                 'image_uri' => true,
                 'delete_label' => 'supprimer',
-                'download_label' => 'télécharger',
                 'allow_delete' => true
             ])
 
