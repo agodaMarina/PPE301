@@ -1,5 +1,9 @@
 {% extends "main/template.html.twig" %}
 
+{% block title %}
+    Ajouter une Commande
+{% endblock title %}
+
 {% block contenu %}
 <div class="container-fluid add-form-list">
     <div class="row">
@@ -21,13 +25,7 @@
                     {{form_start(formulaire)}}
                    
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                   {{form_label(formulaire.dateCommande, " Date *")}}
-                                   {{form_widget(formulaire.dateCommande, {'attr':{class:'form-control', "type": "date"}})}}
-                                    
-                                </div>
-                            </div>
+                           
                             <div class="col-md-6">
                                 <div class="form-group">
                                     {{form_label(formulaire.NumeroCommande, " Numéro *")}}

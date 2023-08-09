@@ -1,4 +1,7 @@
 {% extends "main/template.html.twig" %}
+{% block title %}
+    Ajouter un  Article
+{% endblock title %}
 
 {% block contenu %}
 
@@ -38,13 +41,7 @@
                                 {{form_widget(formulaire.categorie, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{ form_label (formulaire.quantiteArticle,"Quantité *")}}
-                                {{form_widget(formulaire.quantiteArticle, {'attr':{class:'form-control',"placeholder":"Entrer la quantité de l'article"}})}} 
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-6">
                             <div class="form-group">
                                 {{ form_label (formulaire.prixArticle,"Prix *")}}

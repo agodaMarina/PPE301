@@ -68,6 +68,7 @@ class CategorieController extends AbstractController
             );
             return $this->redirectToRoute('liste_categorie');
         }
+         $this->denyAccessUnlessGranted('POST_VIEW', $categorie);
         return $this->render('categorie/modifierCategories.html.twig', [
             'formulaire' => $formulaire->createView(),
             'categorie'=> $categorie
@@ -78,6 +79,7 @@ class CategorieController extends AbstractController
     #[Route('/delete/{id}', name: 'delete_categorie')]
     public function delete(Categorie $categorie, Request $request, CategorieRepository $categorieRepository): Response
     {
+        $this->denyAccessUnlessGranted('POST_DELETE', $categorie);
         if($this->isCsrfTokenValid('delete'.$categorie->getId(), $request->request->get('_token'))){
             $categorieRepository->remove($categorie, true);
         }

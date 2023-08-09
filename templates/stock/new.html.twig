@@ -1,0 +1,65 @@
+{% extends "main/template.html.twig" %}
+
+{% block title %}
+Crééer un nouveau Stock
+{% endblock title %}
+
+{% block contenu %}
+<div class="row">
+    <div class="col-sm-12">
+        {% for message in app.flashes('notice') %}
+        <div class="alert alert-success" role="alert">
+            <div class="iq-alert-text">
+                {{message}}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="card">
+
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Ajouter Un Stock </h4>
+                </div>
+
+            </div>
+            <div class="card-body">
+                {{form_start(form)}}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{form_label(form.article,"Article *")}}
+                            {{form_widget(form.article, {'attr':{class:'selectpicker form-control',
+                            "data-style":"py-0"}})}}
+                        </div>
+                        
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label (form.quantite,"Quantite *")}}
+                            {{form_widget(form.quantite, {'attr':{class:'form-control'}})}}
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label (form.quantiteAlerte,"Quantité minimale *")}}
+                            {{form_widget(form.quantiteAlerte, {'attr':{class:'form-control'}})}}
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
+                    <a href="{{ path('liste_stock') }}" class="btn btn-success mr-2">Annuler</a>
+                    {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock contenu %}

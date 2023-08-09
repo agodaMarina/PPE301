@@ -24,7 +24,7 @@ class CommandeAchatType extends AbstractType
     {
         $builder
             ->add('NumeroCommande', NumberType::class)
-            ->add('dateCommande',DateType::class)
+            
             ->add('TotalHT',NumberType::class)
             ->add('TotalTVA', NumberType::class)
             ->add('TotalTTC',NumberType::class)

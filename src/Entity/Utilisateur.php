@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[UniqueEntity(fields: ['username'], message: 'il exite déja un compte avec ce nom d\'utilisateur')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte enregistré avec ce Email')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,13 +18,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $username = null;
-
-    #[ORM\Column(length:180)]
     private ?string $email = null;
 
-    #[ORM\Column(length:180)]
+    #[ORM\Column(length: 180)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 200)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 180)]
     private ?string $contact = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -35,39 +41,55 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $nom = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $prenom = null;
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getContact(): ?string
-    {
-        return $this->contact;
-    }
-    public function setContact(string $contact): static
-    {
-        $this->contact = $contact;
-        return $this;
-    }
     public function getEmail(): ?string
     {
         return $this->email;
     }
-    public function setEmail(String $email): static
+    public function getNom(): ?string
     {
-        $this->email= $email;
-        return $this;
+        return $this->nom;
     }
-
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+    public function getContact(): ?string
+    {
+        return $this->contact;
+    }
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    public function setEmail(string $email): static
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+    public function setContact(string $contact): static
+    {
+        $this->contact = $contact;
+
+        return $this;
     }
     public function setUsername(string $username): static
     {
@@ -83,7 +105,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return (string) $this->email;
     }
 
     /**
@@ -127,29 +149,5 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
-
-    public function setNom(string $nom): static
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
     }
 }

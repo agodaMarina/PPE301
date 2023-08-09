@@ -1,4 +1,7 @@
 {% extends "main/template.html.twig" %}
+{% block title %}
+    Details Commande
+{% endblock title %}
 
 {% block contenu %}
     
@@ -21,16 +24,18 @@
                         </tr>
                         <tr>
                             <th>Date </th>
-                            <td>{{ commande.Date }}</td>
+                            <td>{{ commande.dateCommande ? commande.dateCommande|date('Y-m-d H:i:s') : '' }}</td>
                         </tr>
-                        <tr>
+
+                        {# <tr>
                             <th>Statut </th>
                             <td>{{ commande.Statut }}</td>
-                        </tr>
+                        </tr> #}
+
                         <tr>
                             <th>Article (s) </th>
                             <td>{% for row in articles %}
-                                {{ row.nomArticle}}
+                                {{ row.nomArticle }}
                             {% endfor %}</td>
                         </tr>
                         <tr>

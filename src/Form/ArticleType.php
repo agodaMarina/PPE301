@@ -32,8 +32,7 @@ class ArticleType extends AbstractType
             ]
                 )
 
-            ->add('quantiteArticle',IntegerType::class
-                )
+            
 
             ->add('imageFile',VichImageType::class,[
                 'required' => false,

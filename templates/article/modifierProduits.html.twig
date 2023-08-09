@@ -1,4 +1,7 @@
 {% extends "main/template.html.twig" %}
+{% block title %}
+    Mofication d'Article
+{% endblock title %}
 
 {% block contenu %}
 
@@ -36,13 +39,7 @@
                             {{form_widget(formulaire.categorie,{'attr':{class:'form-control'}})}}
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{ form_label (formulaire.quantiteArticle,"Quantité *")}}
-                            {{form_widget(formulaire.quantiteArticle, {'attr':{class:'form-control'}})}}
-                            <div class="help-block with-errors"></div>
-                        </div>
-                    </div>
+                  
                     <div class="col-md-6">
                         <div class="form-group">
                             {{ form_label (formulaire.prixArticle,"Prix *")}}

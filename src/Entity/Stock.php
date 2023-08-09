@@ -15,18 +15,29 @@ class Stock
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $quantite = null;
+    private ?int $quantite = 0;
 
     #[ORM\Column(type: Types::SMALLINT)]
-    private ?int $quantiteAlerte = null;
+    private ?int $quantiteAlerte = 5;
 
+    
     #[ORM\OneToOne(mappedBy: 'stock', cascade: ['persist', 'remove'])]
     private ?Article $article = null;
+
+    // #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    // private ?\DateTimeImmutable $date = null;
+
+   public function __construct()
+   {
+    // $this->date = new \DateTimeImmutable();
+    
+   }
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getQuantite(): ?int
     {
@@ -73,4 +84,18 @@ class Stock
 
         return $this;
     }
+
+    // public function getDate(): ?\DateTimeImmutable
+    // {
+    //     return $this->date;
+    // }
+
+    // public function setDate(\DateTimeImmutable $date): static
+    // {
+    //     $this->date = $date;
+
+    //     return $this;
+    // }
+
+    
 }

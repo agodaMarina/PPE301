@@ -5,6 +5,7 @@ namespace App\DataFixtures;
 use App\Entity\Categorie;
 use App\Entity\Fournisseur;
 use App\Entity\Article;
+use App\Entity\Utilisateur;
 use App\Repository\ArticleRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -25,6 +26,7 @@ class AppFixtures extends Fixture
         //faker
         $faker = Factory::create('fr_FR');
         
+       
         for ($i = 0; $i < 25; $i++) {
             $categorie = new Categorie();
             $categorie->setLibelle($faker->word(5));
@@ -43,17 +45,14 @@ class AppFixtures extends Fixture
             $manager->persist($fournisseur);
             $fournisseurs[] = $fournisseur;
         }
-        // $article=$this->articleRepository->findAll();
-        
+
        
         for ($i = 0; $i < 20; $i++) {
             $article = new Article();
             $article->setNomArticle($faker->word())
                 ->setPrixArticle(mt_rand(1,10000))
-                ->setQuantiteArticle(mt_rand(2,100))
                 ->setDescription($faker->sentence(5))
-                ->setImageName( $faker->imageUrl('animals', true)
-        );
+                ->setImageName('https://img.freepik.com/psd-gratuit/presentoir-maquette-podium-pour-presentation-du-produit-decore-jolies-feuilles-tropicales_103373-1786.jpg?w=740&t=st=1691433020~exp=1691433620~hmac=957ec8f649fad493a82a2b49d4aa09f613a728cf21acccd943d8dea6a742de6f');
            
         
 
@@ -63,9 +62,14 @@ class AppFixtures extends Fixture
 
             $article->setCategorie($categories[$i]);
            
+
             $manager->persist($article);
+
+
         }
 
+
+        
        
         $manager->flush();
     }

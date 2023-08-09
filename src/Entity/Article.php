@@ -30,9 +30,7 @@ class Article
     #[ORM\Column]
     private ?float $prixArticle = null;
 
-    #[ORM\Column]
-    private ?int $quantiteArticle = null;
-
+   
     #[Vich\UploadableField(mapping: 'articles', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
 
@@ -64,6 +62,7 @@ class Article
         
         $this->commandeAchats = new ArrayCollection();
         $this->fournisseurs = new ArrayCollection();
+        $this->stock = new Stock();
     }
 
     public function getId(): ?int
@@ -107,17 +106,7 @@ class Article
         return $this;
     }
 
-    public function getQuantiteArticle(): ?int
-    {
-        return $this->quantiteArticle;
-    }
-
-    public function setQuantiteArticle(int $quantiteArticle): static
-    {
-        $this->quantiteArticle = $quantiteArticle;
-
-        return $this;
-    }
+   
 
     public function setImageFile(?File $imageFile = null): void
     {

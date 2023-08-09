@@ -9,11 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[route("/article")]
 class ArticleController extends AbstractController
 {
     #[Route('/create', name: 'create_article')]
+  
     public function create(ArticleRepository $articleRepository, Request $request): Response
     {
 
@@ -45,18 +47,22 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/detail/{id}', name: 'detail_article')]
-    public function show(Article $article, ArticleRepository $articleRepository, $id): Response
+    public function show(Article $article): Response
     {
         $fournisseurs=$article->getFournisseurs();
+        $q=$article->getStock();
+        $qa=$q->getQuantite();
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'fournisseurs'=>$fournisseurs,
+            'quantiteEnStock'=>$qa,
 
         ]);
     }
 
 
     #[Route('/update/{id}', name: 'update_article')]
+    
     public function update(ArticleRepository $articleRepository, Article $article, Request $request): Response
     {
         $formulaire = $this->createForm(ArticleType::class, $article);
@@ -71,6 +77,7 @@ class ArticleController extends AbstractController
             );
             return $this->redirectToRoute('liste_article');
         }
+         $this->denyAccessUnlessGranted('POST_VIEW', $article);
         return $this->render('article/modifierProduits.html.twig', [
             'formulaire' => $formulaire->createView(),
             'article'=>$article
@@ -79,8 +86,10 @@ class ArticleController extends AbstractController
 
 
     #[Route('/delete/{id}', name: 'delete_article')]
+  
     public function delete(ArticleRepository $articleRepository, Article $article, Request $request): Response
     {
+       $this->denyAccessUnlessGranted('POST_DELETE', $article);
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
             $articleRepository->remove($article, true);
         }

@@ -21,6 +21,20 @@ class CommandeAchatController extends AbstractController
         $formulaire = $this->createForm(CommandeAchatType::class, $commandeAchat);
         $formulaire->handleRequest($request);
 
+        $sommePrixArticle=0;
+        $articles=$commandeAchat->getArticles();
+        foreach ($articles as  $article) {
+            
+            $sommePrixArticle +=$article->getPrixArticle();
+        }
+        $commandeAchat->setTotalHT($sommePrixArticle);
+        $tva=$commandeAchat->getTva();
+        $prixht=$commandeAchat->getTotalHT();
+        $totaltva= $tva.$prixht;
+        $commandeAchat->setTotalTVA($totaltva);
+        $totalttc=$totaltva+$prixht;
+        $commandeAchat->setTotalTTC($totalttc);
+
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $commandeAchatRepository->save($commandeAchat, true);
@@ -32,6 +46,11 @@ class CommandeAchatController extends AbstractController
         }
         return $this->render('commande_achat/ajoutCommande.html.twig', [
             'formulaire' => $formulaire->createView(),
+            'commande'=>$commandeAchat,
+            'totaltva'=>$totaltva,
+            'totalttc'=>$totalttc,
+            'prixht'=>$prixht,
+            
         ]);
     }
 
