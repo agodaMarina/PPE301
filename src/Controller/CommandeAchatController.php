@@ -21,19 +21,15 @@ class CommandeAchatController extends AbstractController
         $formulaire = $this->createForm(CommandeAchatType::class, $commandeAchat);
         $formulaire->handleRequest($request);
 
-        $sommePrixArticle=0;
+        $debut= 0;
+        $debut2= 0;
+        $fin= rand(0, 100);
+        $numero=$debut2.$debut.$fin;
+        $commandeAchat->setNumeroCommande($numero);
+        // dd($commandeAchat);
         $articles=$commandeAchat->getArticles();
-        foreach ($articles as  $article) {
-            
-            $sommePrixArticle +=$article->getPrixArticle();
-        }
-        $commandeAchat->setTotalHT($sommePrixArticle);
+        // $commandeAchat->setTotalHT($sommePrixArticle);
         $tva=$commandeAchat->getTva();
-        $prixht=$commandeAchat->getTotalHT();
-        $totaltva= $tva.$prixht;
-        $commandeAchat->setTotalTVA($totaltva);
-        $totalttc=$totaltva+$prixht;
-        $commandeAchat->setTotalTTC($totalttc);
 
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
@@ -47,9 +43,8 @@ class CommandeAchatController extends AbstractController
         return $this->render('commande_achat/ajoutCommande.html.twig', [
             'formulaire' => $formulaire->createView(),
             'commande'=>$commandeAchat,
-            'totaltva'=>$totaltva,
-            'totalttc'=>$totalttc,
-            'prixht'=>$prixht,
+            'numero'=>$numero,
+            
             
         ]);
     }
@@ -71,11 +66,11 @@ class CommandeAchatController extends AbstractController
     public function detail(CommandeAchat $commandeAchat): Response
     {
         //statut de la commande a affiché
-        $fournisseur=$commandeAchat->getFournisseur();
+        // $fournisseur=$commandeAchat->getFournisseur();
         $articles=$commandeAchat->getArticles();
         return $this->render('commande_achat/show.html.twig', [
             'commande' => $commandeAchat,
-            'fournisseur'=>$fournisseur,
+            
             'articles'=>$articles,
         ]);
     }

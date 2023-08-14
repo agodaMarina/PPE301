@@ -47,9 +47,9 @@ class CommandeAchat
     #[ORM\JoinColumn(nullable: false)]
     private ?Tva $Tva = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commande')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Fournisseur $fournisseur = null;
+    // #[ORM\ManyToOne(inversedBy: 'commande')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?Fournisseur $fournisseur = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateCommande = null;
@@ -58,7 +58,7 @@ class CommandeAchat
     {
         $this->articles = new ArrayCollection();
         $this->dateCommande= new \DateTimeImmutable();
-        
+        // $this->NumeroCommande= $NumeroCommande;
     }
 
     public function getId(): ?int
@@ -188,17 +188,6 @@ class CommandeAchat
         return $this;
     }
 
-    public function getFournisseur(): ?Fournisseur
-    {
-        return $this->fournisseur;
-    }
-
-    public function setFournisseur(?Fournisseur $fournisseur): static
-    {
-        $this->fournisseur = $fournisseur;
-
-        return $this;
-    }
 
     public function getDateCommande(): ?\DateTimeImmutable
     {

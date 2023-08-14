@@ -1,7 +1,7 @@
 {% extends "main/template.html.twig" %}
 
 {% block title %}
-    Ajouter une Commande
+Ajouter une Commande
 {% endblock title %}
 
 {% block contenu %}
@@ -9,12 +9,12 @@
     <div class="row">
         <div class="col-sm-12">
             {% for message in app.flashes('notice') %}
-        <div class="alert alert-success" role="alert">
-            <div class="iq-alert-text">
-                {{message}}
+            <div class="alert alert-success" role="alert">
+                <div class="iq-alert-text">
+                    {{message}}
+                </div>
             </div>
-         </div>  
-        {% endfor %}
+            {% endfor %}
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
@@ -23,88 +23,131 @@
                 </div>
                 <div class="card-body">
                     {{form_start(formulaire)}}
-                   
-                        <div class="row">
-                           
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.NumeroCommande, " Numéro *")}}
-                                    {{form_widget(formulaire.NumeroCommande, {'attr':{class:'form-control', id:'dob', name:'dob'}})}}
-                                     
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.articles, "articles *")}}
-                                    {{form_widget(formulaire.articles,  {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.fournisseur, "Fournisseur")}}
-                                    {{form_widget(formulaire.fournisseur,  {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.Tva, "Tva")}}
-                                    {{form_widget(formulaire.Tva,  {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.TotalTVA, "Total Tva")}}
-                                    {{form_widget(formulaire.TotalTVA,  {'attr':{class:'form-control'}})}}
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    {{form_label(formulaire.TotalHT, "Total HT")}}
-                                    {{form_widget(formulaire.TotalHT,  {'attr':{class:'form-control'}})}}
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {{form_label(formulaire.TotalTTC, " Montant Total TTC")}}
-                                    {{form_widget(formulaire.TotalTTC,  {'attr':{class:'form-control'}})}}
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {{form_label(formulaire.MontantTotalEnLettre, "Montant Total TTC en lettre")}}
-                                    {{form_widget(formulaire.MontantTotalEnLettre,  {'attr':{class:'form-control'}})}}
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    {{form_label(formulaire.ConditionDeReglement, "Condition De Règlement")}}
-                                    <div id="quill-tool">
-                                        <button class="ql-bold" data-toggle="tooltip" data-placement="bottom"
-                                            title="Bold"></button>
-                                        <button class="ql-underline" data-toggle="tooltip" data-placement="bottom"
-                                            title="Underline"></button>
-                                        <button class="ql-italic" data-toggle="tooltip" data-placement="bottom"
-                                            title="Add italic text <cmd+i>"></button>
-                                        
-                                    </div>
-                                    <div id="quill-toolbar">
-                                        {{form_widget(formulaire.ConditionDeReglement)}}
 
+                    <div class="row">
+
+                        <h4>Commande N°: {{numero}}</h4>
+         
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                {{form_label(formulaire.dateCommande, " Date *")}}
+                                {{form_widget(formulaire.dateCommande, {'attr':{class:'form-control', id:'dob',
+                                name:'dob'}})}}
+
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            {{form_label(formulaire.Tva, "Tva")}}
+                                            {{form_widget(formulaire.Tva, {'attr':{class:'selectpicker form-control',
+                                            "data-style":"py-0"}})}}
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive-sm">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+
+                                                    <th scope="col">Articles
+                                                    </th>
+                                                    <th class="text-center" scope="col">Quantité</th>
+                                                    <th class="text-center" scope="col">Prix unitaire</th>
+                                                    <th class="text-center" scope="col">Total Ht</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                  
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td><b></b></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Ajouter une ligne
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                               <div class="modal-content">
+                                                  <div class="modal-header">
+                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter une ligne</h5>
+                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                     <span aria-hidden="true">&times;</span>
+                                                     </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                     <form action="" method="post">
+                                                       <select name="" id="">
+
+                                                       </select>
+                                                     </form>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                     <button type="button" class="btn btn-primary">Ajouter</button>
+                                                  </div>
+                                               </div>
+                                            </div>
+                                         </div>
+                                    </div>
+                                    <div class="ttl-amt py-2 px-3 d-flex justify-content-between align-items-center">
+                                        <h6>Total</h6>
+                                        <h3 class="text-primary font-weight-700"></h3>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
-                        <a href="{{ path('liste_commande') }}"class="btn btn-success mr-2">Retour</a>                
-                  
-                    {{form_end(formulaire)}}
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{form_label(formulaire.MontantTotalEnLettre, "Montant Total à payer en lettre")}}
+                                {{form_widget(formulaire.MontantTotalEnLettre, {'attr':{class:'form-control'}})}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+
+                        </div>
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                {{form_label(formulaire.ConditionDeReglement, "Condition De Règlement")}}
+                                <div id="quill-tool">
+                                    <button class="ql-bold" data-toggle="tooltip" data-placement="bottom"
+                                        title="Bold"></button>
+                                    <button class="ql-underline" data-toggle="tooltip" data-placement="bottom"
+                                        title="Underline"></button>
+                                    <button class="ql-italic" data-toggle="tooltip" data-placement="bottom"
+                                        title="Add italic text <cmd+i>"></button>
+
+                                </div>
+                                <div id="quill-toolbar">
+                                    {{form_widget(formulaire.ConditionDeReglement)}}
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        {# <div cla>
+                            <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
+                            <a href="{{ path('liste_commande') }}" class="btn btn-success mr-2">Retour</a>
+                        </div> #}
+                        {{form_end(formulaire)}}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-{% endblock contenu %}
+    {% endblock contenu %}
