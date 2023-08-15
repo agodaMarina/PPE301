@@ -58,7 +58,6 @@ class CommandeAchat
     {
         $this->articles = new ArrayCollection();
         $this->dateCommande= new \DateTimeImmutable();
-        // $this->NumeroCommande= $NumeroCommande;
     }
 
     public function getId(): ?int

@@ -47,18 +47,18 @@ class CommandeAchatType extends AbstractType
 
             )
 
-            // ->add('articles', EntityType::class, [
-            //     'class' => Article::class, 
-            //     'query_builder'=> function(ArticleRepository $article){
-            //          return $article->createQueryBuilder('a')
-            //              ->orderBy('a.nomArticle','ASC');
-            //     },
-            //      'choice_label' => 'nomArticle',
-            //      'multiple' => true,
-            //      'placeholder' => 'Choisissez un article',
+            ->add('articles', EntityType::class, [
+                'class' => Article::class, 
+                'query_builder'=> function(ArticleRepository $article){
+                     return $article->createQueryBuilder('a')
+                         ->orderBy('a.nomArticle','ASC');
+                },
+                 'choice_label' => 'nomArticle',
+                 'multiple' => true,
+                 'placeholder' => 'Choisissez un article',
                 
                  
-            //  ])
+             ])
             ->add('Tva',EntityType::class, [
                 'class' => Tva::class, 
                 'query_builder'=> function(TvaRepository $tva){
