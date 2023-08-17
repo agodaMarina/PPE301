@@ -22,13 +22,13 @@ class CommandeAchat
     private ?int $NumeroCommande = null;
 
     #[ORM\Column]
-    private ?float $TotalHT = null;
+    private ?float $TotalHT = 0;
 
     #[ORM\Column(nullable: false)]
-    private ?float $TotalTVA = null;
+    private ?float $TotalTVA = 0;
 
     #[ORM\Column]
-    private ?float $TotalTTC = null;
+    private ?float $TotalTTC = 0;
 
     #[ORM\Column(length: 255)]
     private ?string $MontantTotalEnLettre = null;
@@ -47,17 +47,19 @@ class CommandeAchat
     #[ORM\JoinColumn(nullable: false)]
     private ?Tva $Tva = null;
 
-    // #[ORM\ManyToOne(inversedBy: 'commande')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?Fournisseur $fournisseur = null;
+   
 
     #[ORM\Column]
     private ?\DateTimeImmutable $dateCommande = null;
+
+    #[ORM\OneToMany(mappedBy: 'commandeAchat', targetEntity: LigneCommande::class , cascade:["persist"])]
+    private Collection $ligneCommande;
 
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->dateCommande= new \DateTimeImmutable();
+        $this->ligneCommande = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -196,6 +198,36 @@ class CommandeAchat
     public function setDateCommande(\DateTimeImmutable $dateCommande): static
     {
         $this->dateCommande = $dateCommande;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LigneCommande>
+     */
+    public function getLigneCommande(): Collection
+    {
+        return $this->ligneCommande;
+    }
+
+    public function addLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if (!$this->ligneCommande->contains($ligneCommande)) {
+            $this->ligneCommande->add($ligneCommande);
+            $ligneCommande->setCommandeAchat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if ($this->ligneCommande->removeElement($ligneCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getCommandeAchat() === $this) {
+                $ligneCommande->setCommandeAchat(null);
+            }
+        }
 
         return $this;
     }

@@ -29,8 +29,7 @@ class Fournisseur
     private ?string $emailFournisseur = null;
 
    
-    // #[ORM\OneToMany(mappedBy: 'fournisseur', targetEntity: CommandeAchat::class)]
-    // private Collection $commande;
+  
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'fournisseurs')]
     private Collection $articles;
@@ -38,7 +37,7 @@ class Fournisseur
     public function __construct()
     {
        
-        // $this->commande = new ArrayCollection();
+       
         $this->articles = new ArrayCollection();
     }
 
@@ -97,35 +96,6 @@ class Fournisseur
 
     
 
-    // /**
-    //  * @return Collection<int, CommandeAchat>
-    //  */
-    // public function getCommande(): Collection
-    // {
-    //     return $this->commande;
-    // }
-
-    // public function addCommande(CommandeAchat $commande): static
-    // {
-    //     if (!$this->commande->contains($commande)) {
-    //         $this->commande->add($commande);
-    //         $commande->setFournisseur($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeCommande(CommandeAchat $commande): static
-    // {
-    //     if ($this->commande->removeElement($commande)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($commande->getFournisseur() === $this) {
-    //             $commande->setFournisseur(null);
-    //         }
-    //     }
-
-    //     return $this;
-    // }
 
     
 public function __toString()

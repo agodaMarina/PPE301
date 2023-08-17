@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\CommandeAchat;
+use App\Entity\LigneCommande;
 use App\Form\CommandeAchatType;
 use App\Repository\CommandeAchatRepository;
+use App\Repository\LigneCommandeAchatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,22 +17,23 @@ class CommandeAchatController extends AbstractController
 {
 
     #[Route('/create', name: 'create_commande')]
-    public function create(Request $request, CommandeAchatRepository $commandeAchatRepository): Response
+    public function create(Request $request, CommandeAchatRepository $commandeAchatRepository, LigneCommandeAchatRepository $ligneCommandeAchatRepository): Response
     {
         $commandeAchat = new commandeAchat();
+        // $ligne = new LigneCommande();
         $formulaire = $this->createForm(CommandeAchatType::class, $commandeAchat);
         $formulaire->handleRequest($request);
 
-        $debut= 0;
-        $debut2= 0;
-        $fin= rand(0, 100);
-        $numero=$debut2.$debut.$fin;
+        
+        $numero= random_int(0, 9999);
         $commandeAchat->setNumeroCommande($numero);
-        // dd($commandeAchat);
+        // $data=$request->get();
         $articles=$commandeAchat->getArticles();
         // $commandeAchat->setTotalHT($sommePrixArticle);
         $tva=$commandeAchat->getTva();
-
+        $q= 1;
+        $p=10;
+        $totalht= $q* $p;
         if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
 
             $commandeAchatRepository->save($commandeAchat, true);
@@ -44,6 +47,7 @@ class CommandeAchatController extends AbstractController
             'formulaire' => $formulaire->createView(),
             'commande'=>$commandeAchat,
             'numero'=>$numero,
+            'totalHt'=>$totalht,
             
             
         ]);
@@ -65,13 +69,14 @@ class CommandeAchatController extends AbstractController
     #[Route('/detail/{id}', name: 'detail_commande')]
     public function detail(CommandeAchat $commandeAchat): Response
     {
-        //statut de la commande a affiché
-        // $fournisseur=$commandeAchat->getFournisseur();
+        $tva=$commandeAchat->getTva()->getValeur();
         $articles=$commandeAchat->getArticles();
+        $ligne=$commandeAchat->getLigneCommande();
         return $this->render('commande_achat/show.html.twig', [
             'commande' => $commandeAchat,
-            
-            'articles'=>$articles,
+            'tva'=>$tva,
+            'ligne'=>$ligne,
+            'articles'=>$articles
         ]);
     }
 

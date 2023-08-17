@@ -23,16 +23,15 @@ Ajouter une Commande
                 </div>
                 <div class="card-body">
                     {{form_start(formulaire)}}
-
+                    {{form_widget(formulaire._token)}}
                     <div class="row">
 
                         <h4>Commande N°: {{numero}}</h4>
-         
-                        <div class="col-md-3">
-                            <div class="form-group">
+
+                        <div class="col-md-3 ">
+                            <div class="form-group mt-3">
                                 {{form_label(formulaire.dateCommande, " Date *")}}
-                                {{form_widget(formulaire.dateCommande, {'attr':{class:'form-control', id:'dob',
-                                name:'dob'}})}}
+                                {{form_widget(formulaire.dateCommande, {'attr':{class:'form-control'}})}}
 
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -41,6 +40,11 @@ Ajouter une Commande
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-sm-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                           
+                                        </div>
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             {{form_label(formulaire.Tva, "Tva")}}
@@ -53,53 +57,38 @@ Ajouter une Commande
                                             <thead>
                                                 <tr>
 
-                                                    <th scope="col">Articles
-                                                    </th>
-                                                    <th class="text-center" scope="col">Quantité</th>
-                                                    <th class="text-center" scope="col">Prix unitaire</th>
-                                                    <th class="text-center" scope="col">Total Ht</th>
+                                                    <th class="text-left" scope="col">Articles</th>
+                                                    <th class="text-left" scope="col">Quantité</th>
+                                                    <th class="text-left" scope="col">Prix unitaire</th>
+                                                    <th class="text-left" scope="col">Total Ht</th>
+                                                    <th class="text-left" scope="col">Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                  
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td><b></b></td>
-                                                </tr>
+                                            <tbody id="articles" data-prototype="{{ include ("commande_achat/_form.html.twig",
+                                                {formulaire:formulaire.ligneCommande.vars.prototype})|e('html_attr') }} " 
+                                                data-index=" {{formulaire.ligneCommande|length> 0 ?
+                                                formulaire.ligneCommande|last.vars.name + 1 : 0 }}">
+
+                                                {% for article in formulaire.ligneCommande %}
+
+                                                {{ include ("commande_achat/_form.html.twig", {formulaire:
+                                                article})
+                                                }}
+                                                
+
+                                                {% endfor %}
 
                                             </tbody>
                                         </table>
-                                        <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+                                        <button type="button" class="btn btn-primary btn-new"
+                                            data-collection="#articles">
                                             Ajouter une ligne
                                         </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                               <div class="modal-content">
-                                                  <div class="modal-header">
-                                                     <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter une ligne</h5>
-                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                     <span aria-hidden="true">&times;</span>
-                                                     </button>
-                                                  </div>
-                                                  <div class="modal-body">
-                                                     <form action="" method="post">
-                                                       <select name="" id="">
 
-                                                       </select>
-                                                     </form>
-                                                  </div>
-                                                  <div class="modal-footer">
-                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                                                     <button type="button" class="btn btn-primary">Ajouter</button>
-                                                  </div>
-                                               </div>
-                                            </div>
-                                         </div>
+                                        {{form_errors(formulaire.ligneCommande)}}
+
                                     </div>
+
                                     <div class="ttl-amt py-2 px-3 d-flex justify-content-between align-items-center">
                                         <h6>Total</h6>
                                         <h3 class="text-primary font-weight-700"></h3>
@@ -139,11 +128,11 @@ Ajouter une Commande
 
                         </div>
 
-                        {# <div cla>
+                     
                             <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
                             <a href="{{ path('liste_commande') }}" class="btn btn-success mr-2">Retour</a>
-                        </div> #}
-                        {{form_end(formulaire)}}
+                        
+                        {{form_end(formulaire, {render_rest: false})}}
                     </div>
                 </div>
             </div>

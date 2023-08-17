@@ -3,11 +3,9 @@
 namespace App\Form;
 
 use App\Entity\CommandeAchat;
-use App\Entity\Article;
-use App\Entity\Fournisseur;
+
 use App\Entity\Tva;
-use App\Repository\ArticleRepository;
-use App\Repository\FournisseurRepository;
+
 use App\Repository\TvaRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -25,8 +23,8 @@ class CommandeAchatType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('NumeroCommande', NumberType::class)
-            ->add('dateCommande', DateType::class)
+           
+            ->add('dateCommande')
             
           
             ->add('MontantTotalEnLettre',TextType::class)
@@ -34,31 +32,16 @@ class CommandeAchatType extends AbstractType
                 'required'=>false
             ])
            
-            ->add('quantite', IntegerType::class,[
-                'mapped'=> false,
-                
-            ]
+           
 
-            )
-            ->add('PrixUnitaire', IntegerType::class,[
-                'mapped'=> false,
-                
-            ]
+            ->add('ligneCommande', CollectionType::class, [
+                'entry_type' => LigneCommandeType::class,
+                'by_reference'=>false,
+                'allow_add'=>true,
+                'allow_delete'=>true
 
-            )
-
-            ->add('articles', EntityType::class, [
-                'class' => Article::class, 
-                'query_builder'=> function(ArticleRepository $article){
-                     return $article->createQueryBuilder('a')
-                         ->orderBy('a.nomArticle','ASC');
-                },
-                 'choice_label' => 'nomArticle',
-                 'multiple' => true,
-                 'placeholder' => 'Choisissez un article',
-                
-                 
              ])
+             
             ->add('Tva',EntityType::class, [
                 'class' => Tva::class, 
                 'query_builder'=> function(TvaRepository $tva){

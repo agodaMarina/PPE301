@@ -56,6 +56,9 @@ class Article
     #[ORM\OneToOne(inversedBy: 'article', cascade: ['persist', 'remove'])]
     private ?Stock $stock = null;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: LigneCommande::class)]
+    private Collection $ligneCommandes;
+
 
     public function __construct()
     {
@@ -63,6 +66,7 @@ class Article
         $this->commandeAchats = new ArrayCollection();
         $this->fournisseurs = new ArrayCollection();
         $this->stock = new Stock();
+        $this->ligneCommandes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,6 +228,36 @@ class Article
     public function setStock(?Stock $stock): static
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LigneCommande>
+     */
+    public function getLigneCommandes(): Collection
+    {
+        return $this->ligneCommandes;
+    }
+
+    public function addLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if (!$this->ligneCommandes->contains($ligneCommande)) {
+            $this->ligneCommandes->add($ligneCommande);
+            $ligneCommande->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneCommande(LigneCommande $ligneCommande): static
+    {
+        if ($this->ligneCommandes->removeElement($ligneCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($ligneCommande->getArticle() === $this) {
+                $ligneCommande->setArticle(null);
+            }
+        }
 
         return $this;
     }

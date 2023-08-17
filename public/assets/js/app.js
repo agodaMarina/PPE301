@@ -45,6 +45,12 @@ Index Of Script
 (function (jQuery) {
   "use strict";
 
+
+
+
+
+
+  
   /*---------------------------------------------------------------------
         Tooltip
         -----------------------------------------------------------------------*/
@@ -428,15 +434,15 @@ Index Of Script
 
   if ($.fn.select2 !== undefined) {
     $("#single").select2({
-      placeholder: "Select a Option",
+      placeholder: "Veuillez Choisir une Option",
       allowClear: true,
     });
     $("#multiple").select2({
-      placeholder: "Select a Multiple Option",
+      placeholder: "Veuillez Choisir une ou plusieurs Options",
       allowClear: true,
     });
     $("#multiple2").select2({
-      placeholder: "Select a Multiple Option",
+      placeholder: "Veuillez Choisir une ou plusieurs Options",
       allowClear: true,
     });
   }
