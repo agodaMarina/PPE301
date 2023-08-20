@@ -47,18 +47,17 @@ class CommandeAchat
     #[ORM\JoinColumn(nullable: false)]
     private ?Tva $Tva = null;
 
-   
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $dateCommande = null;
 
     #[ORM\OneToMany(mappedBy: 'commandeAchat', targetEntity: LigneCommande::class , cascade:["persist"])]
     private Collection $ligneCommande;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $date = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
-        $this->dateCommande= new \DateTimeImmutable();
+        $this->date= new \DateTimeImmutable();
         $this->ligneCommande = new ArrayCollection();
     }
 
@@ -190,18 +189,6 @@ class CommandeAchat
     }
 
 
-    public function getDateCommande(): ?\DateTimeImmutable
-    {
-        return $this->dateCommande;
-    }
-
-    public function setDateCommande(\DateTimeImmutable $dateCommande): static
-    {
-        $this->dateCommande = $dateCommande;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, LigneCommande>
      */
@@ -228,6 +215,18 @@ class CommandeAchat
                 $ligneCommande->setCommandeAchat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeImmutable
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeImmutable $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }

@@ -8,6 +8,8 @@ use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,8 +30,17 @@ class LigneCommandeType extends AbstractType
                 ]
             ])
 
-            ->add('quantite')
-            ->add('prixUnitaire');
+            ->add('quantite',IntegerType::class,[
+                'attr'=>[
+                    'class'=> 'form-control'
+                ]
+            ]
+            )
+            ->add('prixUnitaire', NumberType::class,[
+                'attr'=>[
+                    'class'=> 'form-control'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

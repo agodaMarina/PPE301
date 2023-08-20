@@ -69,7 +69,7 @@ class CommandeAchatController extends AbstractController
     #[Route('/detail/{id}', name: 'detail_commande')]
     public function detail(CommandeAchat $commandeAchat): Response
     {
-        $tva=$commandeAchat->getTva()->getValeur();
+        $tva=$commandeAchat->getTva();
         $articles=$commandeAchat->getArticles();
         $ligne=$commandeAchat->getLigneCommande();
         return $this->render('commande_achat/show.html.twig', [

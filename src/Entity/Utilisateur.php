@@ -32,6 +32,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
+    // #[ORM\Column(length: 100)]
+    // private ?string $resetToken;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -97,6 +100,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    // public function getResetToken(): ?string
+    // {
+    //     return $this->resetToken;
+    // }
+
+    // public function setResetToken(?string $resetToken): self
+    // {
+    //     $this->resetToken = $resetToken;
+
+    //     return $this;
+    // }
 
     /**
      * A visual identifier that represents this user.

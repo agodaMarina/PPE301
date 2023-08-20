@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Query\QueryException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -63,6 +66,7 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
   public function findOneByIdJoinedToSupplier(int $productId): ?Article
 {
     $entityManager = $this->getEntityManager();
@@ -75,6 +79,48 @@ class ArticleRepository extends ServiceEntityRepository
     )->setParameter('id', $productId);
 
     return $query->getOneOrNullResult();
+}
+
+public function getNombre()
+{
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb
+        ->select('count(a.id)')
+        ->from('App\Entity\Article', 'a')
+    ;
+
+    $query = $qb->getQuery();
+
+    return $query->getSingleScalarResult();
+}
+public function getPrixTotal()
+{
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb
+        ->select('sum(a.prixArticle)')
+        ->from('App\Entity\Article', 'a')
+    ;
+
+    $query = $qb->getQuery();
+
+    return $query->getSingleScalarResult();
+}
+
+public function getPrixEleve()
+{
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb
+        ->select('a')
+        ->from('App\Entity\Article', 'a')
+        ->where('a.prixArticle>2000')
+    ;
+
+    $query = $qb->getQuery();
+
+    return $query->getResult();
 }
 
 }

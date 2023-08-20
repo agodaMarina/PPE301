@@ -16,7 +16,7 @@ const nouvelleLigne = (e) => {
 
     const item = document.createElement("tr");
 
-    item.innerHTML = collectionHolder
+    item.innerHTML += collectionHolder
         .dataset
         .prototype
         .replace(
@@ -41,4 +41,3 @@ document
 document
     .querySelectorAll('.btn-new')
     .forEach(btn => btn.addEventListener("click", nouvelleLigne));
-

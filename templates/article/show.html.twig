@@ -1,11 +1,11 @@
 {% extends "main/template.html.twig" %}
 
 {% block title %}
-    Details Article
+Details Article
 {% endblock title %}
 
 {% block contenu %}
-    
+
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -15,11 +15,11 @@
                 </div>
             </div>
             <div class="card-body">
-               
+
 
                 <table class="table">
                     <tbody>
-                       
+
                         <tr>
                             <th>Nom</th>
                             <td>{{ article.nomArticle }}</td>
@@ -28,45 +28,46 @@
                             <th>Prix</th>
                             <td>{{ article.prixArticle }}</td>
                         </tr>
-             
+
                         <tr>
                             <th>Quantité en stock</th>
                             <td>{{ quantiteEnStock }}</td>
                         </tr>
 
-                         <tr>
+                        <tr>
                             <th>Categorie</th>
                             <td>{{ article.categorie }}</td>
-                        </tr> 
+                        </tr>
                         <tr>
                             <th>Fournisseur(s)</th>
                             <td>
                                 {% for row in fournisseurs %}
-                                    {{row.nomFournisseur}}, 
-                                    {% else %}
-                                    
+                                {{row.nomFournisseur}},
+                                {% else %}
+
                                 Aucun Fournisseur enregistré pour ce article
-                                 {% endfor %}</td>
-                        </tr> 
+                                {% endfor %}</td>
+                        </tr>
 
                         <tr>
                             <th>Description</th>
                             <td>{{ article.description}}</td>
                         </tr>
-                       
+
                         <img src="{{vich_uploader_asset(article,'imageFile')}}" alt="" style="width:200px">
                     </tbody>
                 </table>
-            
-                <a href="{{ path('liste_article') }}"class="btn btn-success mt-2">Liste</a>
-            
-                <a href="{{ path('update_article', {'id': article.id})}}"class="btn btn-primary mt-2">Modifier</a>
 
-               {% include "article/delete.html.twig" %}
-            
+                <a href="{{ path('liste_article') }}" class="btn btn-success mt-2">Liste</a>
+
+                <a href="{{ path('update_article', {'id': article.id})}}" class="btn btn-primary mt-2">Modifier</a>
+
+                {{ include ("article/delete.html.twig")}}
+               
             </div>
         </div>
     </div>
+</div>
 </div>
 
 {% endblock contenu %}
