@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\LigneCommande;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping\Entity;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -27,18 +28,27 @@ class LigneCommandeType extends AbstractType
                 'choice_label' => 'nomArticle',
                 'attr'=>[
                     'class'=> 'form-control'
+                   
                 ]
             ])
 
             ->add('quantite',IntegerType::class,[
                 'attr'=>[
                     'class'=> 'form-control'
+                    
                 ]
             ]
             )
             ->add('prixUnitaire', NumberType::class,[
                 'attr'=>[
                     'class'=> 'form-control'
+                    
+                ]
+            ])
+            ->add('totalLigne',null,[
+                'attr'=>[
+                    'class'=> 'form-control'
+                    
                 ]
             ]);
     }

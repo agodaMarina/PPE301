@@ -25,7 +25,7 @@
                             <th>articles</th>
                             <td>
                             {% for row in article %}
-                                {{ row.nomArticle}}
+                            <a href="{{path ('detail_article',{'id':row.id})}}"><p class="font-weight-bold text-primary">{{ row.nomArticle}}</p></a>
                             {% endfor %}
                             </td>
                         </tr>

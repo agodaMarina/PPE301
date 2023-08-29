@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/categorie')]
 class CategorieController extends AbstractController
 {
-    #[Route('/create', name: 'create_categorie')]
+    #[Route('/create', name: 'create_categorie',methods: ['GET', 'POST'])]
     public function create(CategorieRepository $categorieRepository, Request $request): Response
     {
         $categorie= new Categorie();
@@ -34,7 +34,7 @@ class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/read', name: 'liste_categorie')]
+    #[Route('/read', name: 'liste_categorie',methods: ['GET'])]
     public function read(CategorieRepository $categorieRepository): Response
     {
         $liste_categorie=$categorieRepository->findAll();
@@ -43,7 +43,7 @@ class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/detail/{id}', name: 'detail_categorie')]
+    #[Route('/detail/{id}', name: 'detail_categorie',methods: ['GET'])]
     public function show(Categorie $categorie): Response
     {   
         $articles=$categorie->getArticles();
@@ -53,7 +53,7 @@ class CategorieController extends AbstractController
         ]);
     }
 
-    #[Route('/update/{id}', name: 'update_categorie')]
+    #[Route('/update/{id}', name: 'update_categorie',methods: ['GET', 'POST'])]
     public function update(CategorieRepository $categorieRepository, Categorie $categorie, Request $request): Response
     {
         $formulaire= $this->createForm(CategorieType::class, $categorie);
@@ -76,7 +76,7 @@ class CategorieController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'delete_categorie')]
+    #[Route('/delete/{id}', name: 'delete_categorie',methods: ['POST'])]
     public function delete(Categorie $categorie, Request $request, CategorieRepository $categorieRepository): Response
     {
         $this->denyAccessUnlessGranted('POST_DELETE', $categorie);

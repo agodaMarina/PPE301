@@ -11,9 +11,11 @@
 // document.querySelector('#new-article').addEventListener('click', addArticle);
 
 //ajouter une nouvelle ligne
-const nouvelleLigne = (e) => {
-    const collectionHolder = document.querySelector(e.currentTarget.dataset.collection);
 
+
+const nouvelleLigne = (e) => {
+    
+    const collectionHolder = document.querySelector(e.currentTarget.dataset.collection);
     const item = document.createElement("tr");
 
     item.innerHTML += collectionHolder
@@ -22,22 +24,27 @@ const nouvelleLigne = (e) => {
         .replace(
             /__name__/g,
             collectionHolder.dataset.index);
-
-    item.querySelector(".btn-remove").addEventListener("click", ()=>item.remove());
-
+        
+    item.querySelector(".btn-remove").addEventListener("click", () => item.remove());
+   
     collectionHolder.appendChild(item);
 
     collectionHolder.dataset.index++;
-     
+
+    
+    
 
 };
 
+
+
 //supprimer la ligne 
- 
 document
     .querySelectorAll('.btn-remove')
     .forEach(btn => btn.addEventListener("click", (e) => e.currentTarget.closest('.item').remove()));
-
+//ajouter une ligne
 document
     .querySelectorAll('.btn-new')
     .forEach(btn => btn.addEventListener("click", nouvelleLigne));
+
+

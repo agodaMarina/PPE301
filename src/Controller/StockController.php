@@ -65,7 +65,7 @@ class StockController extends AbstractController
             $stockRepository->save($stock, true);
             $this->addFlash(
                 'notice',
-                'le Stock a bien été modifié'
+                'Le Stock de : '. $stock->getArticle().' a bien été modifié'
             );
             return $this->redirectToRoute('liste_stock', [], Response::HTTP_SEE_OTHER);
         }

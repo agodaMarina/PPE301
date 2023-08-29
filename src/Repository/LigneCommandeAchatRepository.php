@@ -38,6 +38,19 @@ class LigneCommandeAchatRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    public function getPrixTotal()
+{
+    $qb = $this->getEntityManager()->createQueryBuilder();
+
+    $qb
+        ->select('sum(a.prixArticle)')
+        ->from('App\Entity\Article', 'a')
+    ;
+
+    $query = $qb->getQuery();
+
+    return $query->getSingleScalarResult();
+}
 
 //    /**
 //     * @return LigneCommandeAchat[] Returns an array of LigneCommandeAchat objects

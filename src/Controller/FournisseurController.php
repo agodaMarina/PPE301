@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/fournisseur')]
 class FournisseurController extends AbstractController
 {
-    #[Route('/create', name: 'create_fournisseur')]
+    #[Route('/create', name: 'create_fournisseur',methods: ['GET', 'POST'])]
     public function create(FournisseurRepository $fournisseurRepository, Request $request): Response
     {
         
@@ -34,7 +34,7 @@ class FournisseurController extends AbstractController
             'formulaire' => $formulaire->createView(),
         ]);
     }
-    #[Route('/read', name: 'read_fournisseur')]
+    #[Route('/read', name: 'read_fournisseur',methods: ['GET'])]
     public function read(FournisseurRepository $fournisseurRepository): Response
     {
 
@@ -44,7 +44,7 @@ class FournisseurController extends AbstractController
         ]);
     }
 
-    #[Route('/detail/{id}', name: 'detail_fournisseur')]
+    #[Route('/detail/{id}', name: 'detail_fournisseur',methods: ['GET'])]
     public function show(Fournisseur $fournisseur): Response
     {
 
@@ -55,7 +55,7 @@ class FournisseurController extends AbstractController
         ]);
     }
 
-    #[Route('/update/{id}', name: 'update_fournisseur')]
+    #[Route('/update/{id}', name: 'update_fournisseur',methods: ['GET', 'POST'])]
     public function update(Fournisseur $fournisseur, Request $request, FournisseurRepository $fournisseurRepository): Response
     {
         
@@ -78,7 +78,7 @@ class FournisseurController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'delete_fournisseur')]
+    #[Route('/delete/{id}', name: 'delete_fournisseur',methods: ['POST'])]
     public function delete(Fournisseur $fournisseur, Request $request, FournisseurRepository $fournisseurRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$fournisseur->getId(),$request->request->get('_token'))) {

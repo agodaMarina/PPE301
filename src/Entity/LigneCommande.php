@@ -17,11 +17,16 @@ class LigneCommande
     #[ORM\JoinColumn(nullable: false)]
     private ?CommandeAchat $commandeAchat;
  
+    
     #[ORM\Column]
     private ?int $quantite = 0;
 
     #[ORM\Column]
     private ?float $prixUnitaire = 0;
+
+    
+    #[ORM\Column]
+    private ?float $totalLigne;
 
 
    
@@ -33,6 +38,17 @@ class LigneCommande
     public function setQuantite(int $quantite): static
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+    public function getTotalLigne(): ?int
+    {
+        return $this->totalLigne;
+    }
+
+    public function setTotalLigne(float $totalLigne): static
+    {
+        $this->totalLigne = $totalLigne;
 
         return $this;
     }

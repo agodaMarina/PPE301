@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommandeAchatController extends AbstractController
 {
 
-    #[Route('/create', name: 'create_commande')]
+    #[Route('/create', name: 'create_commande',methods: ['GET', 'POST'])]
     public function create(Request $request, CommandeAchatRepository $commandeAchatRepository, LigneCommandeAchatRepository $ligneCommandeAchatRepository): Response
     {
         $commandeAchat = new commandeAchat();
@@ -34,14 +34,17 @@ class CommandeAchatController extends AbstractController
         $q= 1;
         $p=10;
         $totalht= $q* $p;
-        if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
 
             $commandeAchatRepository->save($commandeAchat, true);
             $this->addFlash(
                 'notice',
                 'la commande a été créé avec succès !'
             );
+            
+
             return $this->redirectToRoute('create_commande');
+            
         }
         return $this->render('commande_achat/ajoutCommande.html.twig', [
             'formulaire' => $formulaire->createView(),
@@ -54,7 +57,7 @@ class CommandeAchatController extends AbstractController
     }
 
 
-    #[Route('/read', name: 'liste_commande')]
+    #[Route('/read', name: 'liste_commande', methods: ['GET'])]
     public function read(CommandeAchatRepository $commandeAchatRepository): Response
     {   
 
@@ -66,17 +69,30 @@ class CommandeAchatController extends AbstractController
 
 
 
-    #[Route('/detail/{id}', name: 'detail_commande')]
+    #[Route('/detail/{id}', name: 'detail_commande',methods: ['GET'])]
     public function detail(CommandeAchat $commandeAchat): Response
     {
         $tva=$commandeAchat->getTva();
+        $t=$tva->getValeur();
         $articles=$commandeAchat->getArticles();
         $ligne=$commandeAchat->getLigneCommande();
+        
+        
+        $somme=1;
+        
+        $commandeAchat->setTotalHT($somme);
+        $ttva=($somme*$t)/100;
+        $commandeAchat->setTotalTVA($ttva);
+        $totalttc=$somme+$ttva;
+        $commandeAchat->setTotalTTC($totalttc);
+
         return $this->render('commande_achat/show.html.twig', [
             'commande' => $commandeAchat,
             'tva'=>$tva,
             'ligne'=>$ligne,
-            'articles'=>$articles
+            'articles'=>$articles,
+            'ttc'=>$totalttc,
+            'ht'=>$somme,
         ]);
     }
 

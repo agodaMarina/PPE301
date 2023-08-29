@@ -21,13 +21,8 @@ Details Commande
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <img src="../assets/images/logo.png" class="logo-invoice img-fluid mb-3">
-                        <h5 class="mb-0">Hello, Barry Techs</h5>
-                        <p>It is a long established fact that a reader will be distracted by the readable content of a
-                            page when looking at
-                            its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                            of letters, as
-                            opposed to using 'Content here, content here', making it look like readable English.</p>
+                        <h5 class="mb-0"></h5>
+                        <p></p>
                     </div>
                 </div>
                 <div class="row">
@@ -37,8 +32,8 @@ Details Commande
                                 <thead>
                                     <tr>
                                         <th scope="col">Date</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Numéro</th>
+                                        <th scope="col">Statut</th>
+                                        <th scope="col">Numéro de commande</th>
 
                                     </tr>
                                 </thead>
@@ -70,9 +65,12 @@ Details Commande
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   
                                     {% set compteur = 1%}
 
                                     {% for row in ligne %}
+                                    {% set htt = row.quantite * row.prixUnitaire %}
+
 
                                     <tr>
                                         <th class="text-center" scope="row">{{compteur}}</th>
@@ -83,6 +81,7 @@ Details Commande
                                         <td class="text-center">{{row.quantite}}</td>
                                         <td class="text-center">{{row.prixUnitaire}}</td>
                                         <td class="text-center"><b>{{row.quantite * row.prixUnitaire}}</b></td>
+                                        
                                     </tr>
                                     {% set compteur= compteur+1 %}
                                     {% endfor %}
@@ -105,7 +104,7 @@ Details Commande
 
                                 <div class="mb-2">
                                     <h6>Total HT</h6>
-                                    <p>$4597.50</p>
+                                    <p>0</p>
                                 </div>
                                 <div>
                                     <h6>Tva</h6>
@@ -114,7 +113,7 @@ Details Commande
                             </div>
                             <div class="ttl-amt py-2 px-3 d-flex justify-content-between align-items-center">
                                 <h6>Total TTC</h6>
-                                <h3 class="text-primary font-weight-700">$4137.75</h3>
+                                <h3 class="text-primary font-weight-700">0</h3>
                             </div>
                         </div>
                     </div>

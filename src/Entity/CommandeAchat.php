@@ -31,7 +31,7 @@ class CommandeAchat
     private ?float $TotalTTC = 0;
 
     #[ORM\Column(length: 255)]
-    private ?string $MontantTotalEnLettre = null;
+    private ?string $MontantTotalEnLettre = " ";
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ConditionDeReglement = null;

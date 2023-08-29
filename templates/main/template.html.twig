@@ -212,7 +212,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class=" ">
+                        {# <li class=" ">
                             <a href="#profiles" class="collapsed" data-toggle="collapse" aria-expanded="false">
                                 <svg class="svg-icon" id="p-dash5" width="20" height="20"
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
@@ -243,7 +243,7 @@
                                 </li>
 
                             </ul>
-                        </li>
+                        </li> #}
 
 
 
@@ -586,7 +586,6 @@
                                 <h3 class="mb-3">Bienvenue {{app.user.username}} </h3>
                                 <p class="mb-0 mr-4">Le Tableau de Bord vous donne un aperçu sur la gestion de Votre
                                     entreprise</p>
-
                             </div>
                         </div>
                     </div>
@@ -802,6 +801,7 @@
     <!-- app JavaScript -->
     <script src="{{asset ('../assets/js/app.js')}}"></script>
     <script src="{{asset ('../assets/js/query.js')}}"></script>
+    <script src="{{asset ('../assets/js/calcul.js')}}"></script>
   
     {% endblock scripts %}
 

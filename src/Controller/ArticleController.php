@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[route("/article")]
 class ArticleController extends AbstractController
 {
-    #[Route('/create', name: 'create_article')]
+    #[Route('/create', name: 'create_article',methods: ['GET', 'POST'])]
   
     public function create(ArticleRepository $articleRepository, Request $request): Response
     {
@@ -37,7 +37,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/read', name: 'liste_article')]
+    #[Route('/read', name: 'liste_article',methods: ['GET'])]
     public function read(ArticleRepository $articleRepository): Response
     {
         $listeArticle = $articleRepository->findAll();
@@ -46,7 +46,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/detail/{id}', name: 'detail_article')]
+    #[Route('/detail/{id}', name: 'detail_article',methods: ['GET'])]
     public function show(Article $article): Response
     {
         $fournisseurs=$article->getFournisseurs();
@@ -61,7 +61,7 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/update/{id}', name: 'update_article')]
+    #[Route('/update/{id}', name: 'update_article',methods: ['GET', 'POST'])]
     
     public function update(ArticleRepository $articleRepository, Article $article, Request $request): Response
     {
@@ -85,7 +85,7 @@ class ArticleController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'delete_article')]
+    #[Route('/delete/{id}', name: 'delete_article',methods: ['POST'])]
   
     public function delete(ArticleRepository $articleRepository, Article $article, Request $request): Response
     {

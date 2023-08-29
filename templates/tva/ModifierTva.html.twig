@@ -24,7 +24,7 @@
                         <div class="col-md-6">   
 
                             <div class="form-group">
-                                {{ form_label (formulaire.Valeur,"Valeur *")}}
+                                {{ form_label (formulaire.valeur,"Valeur *")}}
                                 {{form_widget(formulaire.valeur, {'attr':{class:'form-control',"placeholder":"Entrer le nom de l'article"}})}} 
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -32,8 +32,8 @@
                         </div>    
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{form_label(formulaire.statut,"Statut *")}}
-                                {{form_widget(formulaire.statut, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
+                                {{form_label(formulaire.Statut,"Statut *")}}
+                                {{form_widget(formulaire.Statut, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
                             </div>
                         </div>
 

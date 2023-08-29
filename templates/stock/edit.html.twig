@@ -18,7 +18,7 @@ Modifier un Stock
 
             <div class="card-header d-flex justify-content-between">
                 <div class="header-title">
-                    <h4 class="card-title">Modifier le Stock de:{{stock.article}} </h4>
+                    <h4 class="card-title">Modifier le Stock de: {{stock.article}} </h4>
                 </div>
 
             </div>
@@ -26,15 +26,6 @@ Modifier un Stock
                 {{form_start(form)}}
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            {{form_label(form.article,"Article *")}}
-                            {{form_widget(form.article, {'attr':{class:'selectpicker form-control',
-                            "data-style":"py-0"}})}}
-                        </div>
-
-
-                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             {{ form_label (form.quantite,"Quantite *")}}
@@ -57,7 +48,7 @@ Modifier un Stock
                 <button type="submit" class="btn btn-primary mr-2">Modifier</button>
                 <a href="{{ path('liste_stock') }}" class="btn btn-success mr-2">Retour</a>
 
-                {{form_end(form)}}
+                {{form_end(form, {render_rest: false})}}
             </div>
         </div>
     </div>

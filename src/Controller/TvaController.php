@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/Tva')]
 class TvaController extends AbstractController
 {
-    #[Route('/read', name: 'liste_tva')]
+    #[Route('/read', name: 'liste_tva',methods: ['GET'])]
     public function index(TvaRepository $tvaRepository): Response
     {
         $tva= $tvaRepository->findAll();
@@ -21,7 +21,7 @@ class TvaController extends AbstractController
             'tvas' => $tva,
         ]);
     }
-    #[Route('/create', name: 'create_tva')]
+    #[Route('/create', name: 'create_tva',methods: ['GET', 'POST'])]
     public function create(TvaRepository $tvaRepository, Request $request): Response
     {
         $tva=new Tva();
@@ -39,7 +39,7 @@ class TvaController extends AbstractController
             'formulaire' => $formulaire->createView(),
         ]);
     }
-    #[Route('/update/{id}', name: 'update_tva')]
+    #[Route('/update/{id}', name: 'update_tva',methods: ['GET', 'POST'])]
     public function update(TvaRepository $tvaRepository, Tva $tva, Request $request): Response
     {
         $formulaire=$this->createForm(TvaType::class, $tva);
@@ -55,5 +55,14 @@ class TvaController extends AbstractController
         return $this->render('tva/ModifierTva.html.twig', [
             'formulaire' => $formulaire->createView(),
         ]);
+    }
+    #[Route('/delete/{id}', name: 'delete_tva',methods: ['POST'])]
+    public function delete(Tva $Tva, Request $request, TvaRepository $TvaRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$Tva->getId(),$request->request->get('_token'))) {
+            $TvaRepository->remove($Tva, true);
+        }
+
+        return $this->redirectToRoute('liste_tva');
     }
 }

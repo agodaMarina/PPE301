@@ -42,7 +42,8 @@ Details Article
                             <th>Fournisseur(s)</th>
                             <td>
                                 {% for row in fournisseurs %}
-                                {{row.nomFournisseur}},
+                                <a href="{{path ('detail_fournisseur',{'id':row.id})}}"><p class="font-weight-bold text-primary">{{ row.nomFournisseur}}</p></a>
+                         
                                 {% else %}
 
                                 Aucun Fournisseur enregistré pour ce article
