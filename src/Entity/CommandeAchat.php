@@ -30,8 +30,8 @@ class CommandeAchat
     #[ORM\Column]
     private ?float $TotalTTC = 0;
 
-    #[ORM\Column(length: 255)]
-    private ?string $MontantTotalEnLettre = " ";
+    // #[ORM\Column(length: 255, nullable:true)]
+    // private ?string $MontantTotalEnLettre = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ConditionDeReglement = null;
@@ -116,17 +116,17 @@ class CommandeAchat
         return $this;
     }
 
-    public function getMontantTotalEnLettre(): ?string
-    {
-        return $this->MontantTotalEnLettre;
-    }
+    // public function getMontantTotalEnLettre(): ?string
+    // {
+    //     return $this->MontantTotalEnLettre;
+    // }
 
-    public function setMontantTotalEnLettre(string $MontantTotalEnLettre): static
-    {
-        $this->MontantTotalEnLettre = $MontantTotalEnLettre;
+    // public function setMontantTotalEnLettre(string $MontantTotalEnLettre): static
+    // {
+    //     $this->MontantTotalEnLettre = $MontantTotalEnLettre;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getConditionDeReglement(): ?string
     {

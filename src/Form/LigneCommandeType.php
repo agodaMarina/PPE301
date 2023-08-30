@@ -44,13 +44,13 @@ class LigneCommandeType extends AbstractType
                     'class'=> 'form-control'
                     
                 ]
-            ])
-            ->add('totalLigne',null,[
-                'attr'=>[
-                    'class'=> 'form-control'
+                ]);
+            // ->add('totalLigne',null,[
+            //     'attr'=>[
+            //         'class'=> 'form-control'
                     
-                ]
-            ]);
+            //     ]
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

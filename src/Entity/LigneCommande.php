@@ -26,7 +26,7 @@ class LigneCommande
 
     
     #[ORM\Column]
-    private ?float $totalLigne;
+    private ?float $totalLigne=0;
 
 
    

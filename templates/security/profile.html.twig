@@ -1,4 +1,7 @@
 {% extends "main/template.html.twig" %}
+{% block title %}
+    Profile
+{% endblock title %}
 
 {% block contenu %}
 <div class="row">
@@ -6,7 +9,7 @@
         <div class="card car-transparent">
             <div class="card-body p-0">
                 <div class="profile-image position-relative">
-                    <img src="../assets/images/profile/profile.png" class="img-fluid rounded w-100"
+                    <img src="{{ asset ('../assets/images/profile/profile.png') }}" class="img-fluid rounded w-100"
                         alt="profile-image">
                 </div>
             </div>
@@ -19,7 +22,7 @@
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
                     <div class="profile-img position-relative">
-                        <img src="../assets/images/user/1.png" class="img-fluid rounded avatar-110" alt="profile-image">
+                        <img src="{{asset ('../assets/images/user/1.png')}}" class="img-fluid rounded avatar-110" alt="profile-image">
                     </div>
                     <div class="ml-3">
                         <h4 class="mb-1">{{app.user.username}}</h4>

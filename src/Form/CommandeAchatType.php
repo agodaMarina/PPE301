@@ -24,9 +24,9 @@ class CommandeAchatType extends AbstractType
     {
         $builder
            
-            ->add('MontantTotalEnLettre',TextType::class, [
-                'required'=>false,
-            ])
+            // ->add('MontantTotalEnLettre',TextType::class, [
+            //     'required'=>false,
+            // ])
             ->add('ConditionDeReglement', TextareaType::class, [
                 'required'=>false
             ])

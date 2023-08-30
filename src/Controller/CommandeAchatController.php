@@ -6,6 +6,7 @@ use App\Entity\CommandeAchat;
 use App\Entity\LigneCommande;
 use App\Form\CommandeAchatType;
 use App\Repository\CommandeAchatRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\LigneCommandeAchatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,9 +77,15 @@ class CommandeAchatController extends AbstractController
         $t=$tva->getValeur();
         $articles=$commandeAchat->getArticles();
         $ligne=$commandeAchat->getLigneCommande();
+        $somme=0;
+        foreach ($ligne as $l) {
+            $q=$l->getQuantite();
+            $p=$l->getPrixUnitaire();
+            $prixligne=$q * $p ;
+            $somme += $prixligne;
+        }
         
         
-        $somme=1;
         
         $commandeAchat->setTotalHT($somme);
         $ttva=($somme*$t)/100;
@@ -119,12 +126,15 @@ class CommandeAchatController extends AbstractController
     // }
 
 
-    // #[Route('/delete/{id}', name: 'delete_commande')]
-    // public function delete(): Response
-    // {
-    //     return $this->render('commande_achat/index.html.twig', [
-    //         'controller_name' => 'CommandeAchatController',
-    //     ]);
-    // }
+    #[Route('/delete/{id}', name: 'delete_commande')]
+    public function delete(CommandeAchatRepository $commandeAchatRepository, CommandeAchat $commandeAchat, Request $request): Response
+    {
+    //    $this->denyAccessUnlessGranted('POST_DELETE', $commandeAchat);
+        if ($this->isCsrfTokenValid('delete' . $commandeAchat->getId(), $request->request->get('_token'))) {
+            $commandeAchatRepository->remove($commandeAchat, true);
+        }
+
+        return $this->redirectToRoute('liste_commande');
+    }
     
 }

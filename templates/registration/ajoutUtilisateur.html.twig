@@ -1,0 +1,91 @@
+{% extends "main/template.html.twig" %}
+{% block title %}
+    Ajouter un  Utilisateur
+{% endblock title %}
+
+{% block contenu %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between">
+                <div class="header-title">
+                    <h4 class="card-title">Ajouter Un Utilisateur</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                {{form_start(registrationForm)}}
+                    <div class="row"> 
+                        {{ form_errors(registrationForm) }}
+                        <div class="col-md-6">                      
+                            <div class="form-group">
+                                {{form_label(registrationForm.nom,"Nom *")}}
+                                {{form_widget(registrationForm.nom)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>    
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{form_label(registrationForm.prenom, "Prenom *")}}
+                                {{form_widget(registrationForm.prenom)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div> 
+                        <div class="col-md-6">                      
+                            <div class="form-group">
+                                {{form_label(registrationForm.contact, "Contact *")}}
+                                {{form_widget(registrationForm.contact)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>  
+                        <div class="col-md-6">                      
+                            <div class="form-group">
+                                {{form_label(registrationForm.genre, "Genre *")}}
+                                {{form_widget(registrationForm.genre)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div> 
+                        <div class="col-md-12">
+                            <div class="form-group">
+                               {{form_label(registrationForm.email, "Email")}}
+                                {{form_widget(registrationForm.email)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div> 
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{form_label(registrationForm.username, "Nom d'utilisateur")}}
+                                {{form_widget(registrationForm.username)}}
+                            </div>
+                        </div> 
+                        <div class="col-md-6">                      
+                            <div class="form-group">
+                                {{form_label(registrationForm.plainPassword, "Mot De Passe*")}}
+                                {{form_widget(registrationForm.plainPassword)}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {{form_label(registrationForm.Fonction, "Fonction")}}
+                                {{form_widget(registrationForm.Fonction)}}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                           <div class="checkbox d-inline-block mb-3">
+                                <input type="checkbox" class="checkbox-input mr-2" id="checkbox1" checked="">
+                                <label for="checkbox1">Notifier l'utilisateur par mail</label>
+                            </div>
+                        </div>                               
+                    </div>                            
+                    <button type="submit" class="btn btn-primary mr-2">Ajouter</button>
+                    <a href="{{path('liste_utilisateur')}}" class="btn btn-danger">Retour</a>
+
+                {{form_end(registrationForm)}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenu %}

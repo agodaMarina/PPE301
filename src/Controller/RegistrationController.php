@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
+use App\Repository\UtilisateurRepository;
 use App\Security\UtilisateurAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,7 +44,7 @@ class RegistrationController extends AbstractController
             );
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('registration/ajoutUtilisateur.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
@@ -55,5 +56,25 @@ class RegistrationController extends AbstractController
             'user'=>$utilisateur
         ]);
 
+
+    }
+
+    #[Route('/read', name:'liste_utilisateur',methods: ['GET'])]
+    public function ListeUser(UtilisateurRepository $userRepository){
+        
+        return $this->render('security/liste.html.twig', [
+            'users'=>$userRepository->findAll()
+        ]);
+
+    }
+    #[Route('/delete/{id}', name: 'user_delete', methods: ['POST'])]
+    public function delete(Request $request, Utilisateur $user, UtilisateurRepository $userRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $this->container->get('security.token_storage')->setToken(null);
+            $userRepository->remove($user, true);
+        }
+        $this->addFlash('deleted','Votre compte a été supprimé.');
+        return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
     }
 }
