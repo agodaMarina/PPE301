@@ -56,12 +56,16 @@ class TvaController extends AbstractController
             'formulaire' => $formulaire->createView(),
         ]);
     }
-    #[Route('/delete/{id}', name: 'delete_tva',methods: ['POST'])]
+    #[Route('/delete/{id}', name: 'delete_tva')]
     public function delete(Tva $Tva, Request $request, TvaRepository $TvaRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$Tva->getId(),$request->request->get('_token'))) {
-            $TvaRepository->remove($Tva, true);
-        }
+        
+        $TvaRepository->remove($Tva, true);
+        $this->addFlash(
+            'notice',
+            ' Tva supprimée avec succès !'
+        );
+       
 
         return $this->redirectToRoute('liste_tva');
     }

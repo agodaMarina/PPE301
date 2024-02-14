@@ -62,7 +62,7 @@ class FournisseurController extends AbstractController
         $formulaire= $this->createForm(FournisseurType::class, $fournisseur);
         $formulaire->handleRequest($request);
 
-        if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
 
             $fournisseurRepository->save($fournisseur, true);
             $this->addFlash(

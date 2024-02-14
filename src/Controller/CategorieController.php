@@ -59,7 +59,7 @@ class CategorieController extends AbstractController
         $formulaire= $this->createForm(CategorieType::class, $categorie);
         $formulaire->handleRequest($request);
 
-        if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
 
             $categorieRepository->save($categorie, true);
             $this->addFlash(

@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+
 use App\Entity\CommandeAchat;
 use App\Entity\LigneCommande;
 use App\Form\CommandeAchatType;
 use App\Repository\CommandeAchatRepository;
-use App\Repository\CommandeRepository;
+
 use App\Repository\LigneCommandeAchatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -103,6 +104,50 @@ class CommandeAchatController extends AbstractController
         ]);
     }
 
+    // #[Route('/pdf', name: 'pdf')]
+    // public function downloadpdf(CommandeAchat $commandeAchat)
+    // {   
+
+    //     $dompdf = new Dompdf();
+
+    //     $tva=$commandeAchat->getTva();
+    //     $t=$tva->getValeur();
+    //     $articles=$commandeAchat->getArticles();
+    //     $ligne=$commandeAchat->getLigneCommande();
+    //     $somme=0;
+    //     foreach ($ligne as $l) {
+    //         $q=$l->getQuantite();
+    //         $p=$l->getPrixUnitaire();
+    //         $prixligne=$q * $p ;
+    //         $somme += $prixligne;
+    //     }
+        
+        
+        
+    //     $commandeAchat->setTotalHT($somme);
+    //     $ttva=($somme*$t)/100;
+    //     $commandeAchat->setTotalTVA($ttva);
+    //     $totalttc=$somme+$ttva;
+    //     $commandeAchat->setTotalTTC($totalttc);
+
+    //     $html=$this->render('commande_achat/show.html.twig', [
+    //         'commande' => $commandeAchat,
+    //         'tva'=>$tva,
+    //         'ligne'=>$ligne,
+    //         'articles'=>$articles,
+    //         'ttc'=>$totalttc,
+    //         'ht'=>$somme,
+    //     ]);
+    //     dd($html);
+
+        // $dompdf->loadHtml($html);
+        // $dompdf->setPaper('A4', 'portrait');
+        // $dompdf->render();
+        // $dompdf->stream("BonDeCommande.pdf", [
+        //     "Attachment" => true
+        // ]);
+
+    // }
 
     // #[Route('/update/{id}', name: 'update_commande')]
     // public function update(): Response

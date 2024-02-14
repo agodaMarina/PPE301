@@ -28,6 +28,14 @@ Modifier un Stock
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            {{ form_label (form.article,"article *")}}
+                            {{form_widget(form.article, {'attr':{class:'selectpicker form-control', "data-style":"py-0"}})}}
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
                             {{ form_label (form.quantite,"Quantite *")}}
                             {{form_widget(form.quantite, {'attr':{class:'form-control'}})}}
                             <div class="help-block with-errors"></div>
@@ -53,7 +61,6 @@ Modifier un Stock
         </div>
     </div>
 </div>
-
 
 
 {% endblock contenu %}

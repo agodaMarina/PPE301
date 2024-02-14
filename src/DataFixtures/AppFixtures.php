@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         $faker = Factory::create('fr_FR');
         
        
-        for ($i = 0; $i < 25; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $categorie = new Categorie();
             $categorie->setLibelle($faker->word(5));
             
@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
             $manager->persist($categorie);
         } 
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i <10 ; $i++) {
             $fournisseur = new Fournisseur();
             $fournisseur->setNomFournisseur($faker->company())
                 ->setContactFournisseur($faker->phoneNumber())
@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
         }
 
        
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $article = new Article();
             $article->setNomArticle($faker->word())
                 ->setPrixArticle(mt_rand(1,10000))

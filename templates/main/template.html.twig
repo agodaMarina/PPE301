@@ -300,7 +300,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ml-auto navbar-list align-items-center">
-                                <li class="nav-item nav-icon dropdown">
+                                {# <li class="nav-item nav-icon dropdown">
                                     <a href="#" class="search-toggle dropdown-toggle btn border add-btn"
                                         id="dropdownMenuButton02" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
@@ -328,12 +328,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
-                                <li>
+                                </li> #}
+                                {# <li>
                                     <a href="#" class="btn border add-btn shadow-none mx-2 d-none d-md-block"
                                         data-toggle="modal" data-target="#new-order"><i class="las la-plus mr-2"></i>New
                                         Order</a>
-                                </li>
+                                </li> #}
                                 <li class="nav-item nav-icon search-content">
                                     <a href="#" class="search-toggle rounded" id="dropdownSearch" data-toggle="dropdown"
                                         aria-haspopup="true" aria-expanded="false">
@@ -532,11 +532,13 @@
                                                 <div class="p-3">
                                                     <h5 class="mb-1">{{app.user.email}}</h5>
                                                     <p class="mb-0">
-                                                        <script>
-
-                                                            document.write(new Date().toString());
-
-                                                        </script>
+                                                        {% if is_granted('ROLE_ADMIN') %}
+                                                            Administrateur
+                                                        {% elseif is_granted('ROLE_GESTIONNAIREACHAT') %}
+                                                            Gestionnaire d'achats
+                                                        {% elseif is_granted('ROLE_GESTIONNAIRESTOCK') %}
+                                                            Gestionnaire de Sotck
+                                                        {% endif %}
                                                     </p>
                                                     <div class="d-flex align-items-center justify-content-center mt-3">
                                                         <a href="{{path('profile_utilisateur',{'id':app.user.id})}}"
@@ -707,19 +709,19 @@
                     <div class="card card-block card-stretch card-height">
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Order Summary</h4>
+                                <h4 class="card-title">Commandes</h4>
                             </div>                        
                             <div class="card-header-toolbar d-flex align-items-center">
                                 <div class="dropdown">
                                     <span class="dropdown-toggle dropdown-bg btn" id="dropdownMenuButton005"
                                         data-toggle="dropdown">
-                                        This Month<i class="ri-arrow-down-s-line ml-1"></i>
+                                        Ce Mois<i class="ri-arrow-down-s-line ml-1"></i>
                                     </span>
                                     <div class="dropdown-menu dropdown-menu-right shadow-none"
                                         aria-labelledby="dropdownMenuButton005">
-                                        <a class="dropdown-item" href="#">Year</a>
-                                        <a class="dropdown-item" href="#">Month</a>
-                                        <a class="dropdown-item" href="#">Week</a>
+                                        <a class="dropdown-item" href="#">Année</a>
+                                        <a class="dropdown-item" href="#">Mois</a>
+                                        <a class="dropdown-item" href="#">Semaine</a>
                                     </div>
                                 </div>
                             </div>
@@ -776,8 +778,8 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-inline mb-0">
-                                <li class="list-inline-item"><a href="privacy-policy.html">Privacy Policy</a></li>
-                                <li class="list-inline-item"><a href="terms-of-service.html">Terms of Use</a></li>
+                                <li class="list-inline-item"><a href="#">Confidentialité/a></li>
+                                <li class="list-inline-item"><a href="#">Terme d'utilisation</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-6 text-right">
@@ -808,6 +810,7 @@
     <script src="{{asset ('../assets/js/app.js')}}"></script>
     <script src="{{asset ('../assets/js/query.js')}}"></script>
     <script src="{{asset ('../assets/js/calcul.js')}}"></script>
+    
   
     {% endblock scripts %}
 

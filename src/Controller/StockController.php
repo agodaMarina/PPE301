@@ -59,13 +59,13 @@ class StockController extends AbstractController
         $form = $this->createForm(StockType::class, $stock);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() ) {
             // $date_update = new \DateTimeImmutable();
             // $stock->setDate($date_update);
             $stockRepository->save($stock, true);
             $this->addFlash(
                 'notice',
-                'Le Stock de : '. $stock->getArticle().' a bien été modifié'
+                'Le Stock de : '. $stock->getArticle()->getNomArticle().' a bien été modifié'
             );
             return $this->redirectToRoute('liste_stock', [], Response::HTTP_SEE_OTHER);
         }

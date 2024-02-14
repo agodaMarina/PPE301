@@ -68,7 +68,7 @@ class ArticleController extends AbstractController
         $formulaire = $this->createForm(ArticleType::class, $article);
         $formulaire->handleRequest($request);
 
-        if ($formulaire->isSubmitted() && $formulaire->isSubmitted()) {
+        if ($formulaire->isSubmitted() && $formulaire->isValid()) {
 
             $articleRepository->save($article, true);
             $this->addFlash(

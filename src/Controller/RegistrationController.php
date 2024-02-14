@@ -62,7 +62,7 @@ class RegistrationController extends AbstractController
     #[Route('/read', name:'liste_utilisateur',methods: ['GET'])]
     public function ListeUser(UtilisateurRepository $userRepository){
         
-        return $this->render('security/liste.html.twig', [
+        return $this->render('registration/listeUtilisateur.html.twig', [
             'users'=>$userRepository->findAll()
         ]);
 
